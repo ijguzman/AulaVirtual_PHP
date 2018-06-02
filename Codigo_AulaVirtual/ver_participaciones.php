@@ -263,15 +263,15 @@
 <?php
 											include 'dbconnection.php';
 											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
-											$sql="SELECT * FROM auv_foro AF,auv_curso C,auv_asignatura AS, auv_alumno_curso AC WHERE
-												AF.COD_CURSO=C.COD_CURSO AND C.COD_CURSO=AC.COD_CURSO AND AS.COD_ASIGNATURA=C.COD_ASIGNATURA
-												AC.COD_ALUMNO='".$perfil_usuario."' AND AS.COD_ASIGNATURA='".$curso"';";
-											//$mysqli->query($select_curso);
-											//$res_curso = $mysqli->query($select_curso);
+											$sql="SELECT * FROM auv_foro AF,auv_curso C,auv_asignatura ASI, auv_alumno_curso AC WHERE
+												AF.COD_CURSO=C.COD_CURSO AND C.COD_CURSO=AC.COD_CURSO AND ASI.COD_ASIGNATURA=C.COD_ASIGNATURA
+												AND AC.COD_ALUMNO='".$codigo_usuario."' AND ASI.COD_ASIGNATURA='".$curso."';";
+											
 											$result=$mysqli->query($sql);
+											
 											while($mostrar=$result->fetch_object()){
 												echo "<tr>";
-												echo "<td>".$mostrar->COD_FORO."</td>";
+												echo '<td><a href="participar_foro.php?foro='.$mostrar->COD_FORO.'">'.$mostrar->COD_FORO."</a></td>";
 												echo "<td>".$mostrar->TEMA."</td>";
 												echo "<td>".$mostrar->DESCRIPCION."</td>";
 												echo "</tr>";
@@ -279,9 +279,6 @@
 											?>
 											
 											<div class="comment-footer">
-											
-												<button class="btn btn-sm btn-success">CREAR</button>
-												<button class="btn btn-sm btn-red">CANCELAR</button>
 											</div>
 											
 										</li>
@@ -292,17 +289,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
-							</script>
-	<?php
-          include 'dbconnection.php';
-          echo '<form action="insert_rol_usuario.php" method="POST">
 
-         <input type="submit" value="Enviar"></form>';
-        echo '';
-
-          
-      ?>
 		<!-- Main content -->
 
 				

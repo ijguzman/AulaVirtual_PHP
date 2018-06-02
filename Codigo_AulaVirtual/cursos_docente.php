@@ -535,7 +535,7 @@ echo '
 						while($row = $res->fetch_object()){
 							echo '<tr>';
 							//<li><a href="updateuserform.php?ci='.$row->USU_CEDULA.'" >Editar</a></li>
-							echo "<td><a href='tarea.php?Curso=".$row->inCURSO."'>".$row->CURSO."</a></td>";
+							echo "<td><a href='tarea.php?Curso=".$row->CURSO."'>".$row->CURSO."</a></td>";
 							echo '<td>'.$row->NOMBRE.'</td>';
 							echo '</tr>';
 	          			}
