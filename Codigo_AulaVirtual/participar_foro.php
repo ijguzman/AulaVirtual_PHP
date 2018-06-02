@@ -283,8 +283,7 @@ WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
 											}
 											?>
 										
-										
-											
+																				
                                         </thead>
 										
                                         <tbody>
@@ -298,7 +297,18 @@ WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
 						</div>
 					</div>
 					<div class="row">
-							</script>
+		
+		if($perfil_usuario==="ALUMNO"){
+			echo '<form action="insert_participacion.php" method="POST">
+				<textarea name="textarea" name="texto"></textarea> 
+				<input type="submit" value="Registrar participacion">';
+				
+				';
+					  					  echo '</form>';
+	
+		 }		
+					  
+					  
 
       ?>
 		<!-- Main content -->
