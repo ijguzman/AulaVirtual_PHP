@@ -88,10 +88,24 @@
 		
 			<?php
          echo '<li class="active"><a href="tarea.php"><i class=" icon-graduation-cap"></i><span class="title">Tareas</span></a>';
-         echo '<li ><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>';
+         echo '<li ><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>
+		 <ul class="nav collapse">';
 		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
+			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
+			
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Foros</span></a>';
+		 }			
+		 
+		 echo'</ul>';
+
 		 //echo '<li ><a href="anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
 		 echo '<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+		 
 		 <ul class="nav collapse">';
 		 
 		 
