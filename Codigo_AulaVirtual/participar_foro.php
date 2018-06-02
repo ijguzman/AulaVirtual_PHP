@@ -245,12 +245,12 @@
 							include 'dbconnection.php';
 							$sql="SELECT * FROM auv_foro WHERE COD_FORO='$cod_foro'";
 							$result=$mysqli->query($sql);
-											while($mostrar=$result->fetch_object()){
-												echo '<h1>TEMA:'.$mostrar->TEMA.'</h1>';
-												echo '<h1>DESCRIPCION:'.$mostrar->DESCRIPCION.'</h1>';
-											}
-											?>
-
+							while($mostrar=$result->fetch_object()){
+								echo '<h1>TEMA:'.$mostrar->TEMA.'</h1>';
+								echo '<h1>DESCRIPCION:'.$mostrar->DESCRIPCION.'</h1>';
+								$cod_curso=$mostrar->COD_CURSO;
+							}
+							?>
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
                                     <div class="caption font-dark">
@@ -271,7 +271,7 @@
 											include 'dbconnection.php';
 											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
 											$sql_participaciones="SELECT FA.COD_FORO,FA.TEXTO,FA.FECHA,A.NOMBRES,A.APELLIDOS FROM auv_foro_alumno FA,auv_alumno A
-WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
+											WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
 											
 											$result=$mysqli->query($sql_participaciones);
 											while($mostrar=$result->fetch_object()){
@@ -297,11 +297,13 @@ WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
 						</div>
 					</div>
 					<div class="row">
-		
+		<?php
 		if($perfil_usuario==="ALUMNO"){
 			echo '<form action="insert_participacion.php" method="POST">
-				<textarea name="textarea" name="texto"></textarea> 
-				<input type="submit" value="Registrar participacion">';
+				<textarea  name="texto"></textarea> 
+				<input type="hidden" value="'.$cod_curso.'" name="cod_curso"/>
+				<input type="hidden" value="'.$cod_foro.'" name="cod_foro"/> 
+				<input type="submit" value="Registrar participacion">
 				
 				';
 					  					  echo '</form>';
@@ -710,47 +712,7 @@ WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
 		});
 		canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
 	});
-	<?php
-          include 'dbconnection.php';
-          echo '<form action="insert_anuncio.php" method="POST">
-       
-          <select name="cod_curso">';
-          $res = $mysqli->query($cbx_curso);
-                while($row = $res->fetch_object()){
-                    echo "
-                        <option value='".$row->COD_CURSO."'>".$row->NOMBRE."</option>";
-                }
-        echo '  </select>';
-      
-        
-        echo '<br/><br/><br/><br/><br/><br/><input type="submit" value="Enviar"></form>';
-        echo '';
-
-          
-      ?>
-	<?php
-          include 'dbconnection.php';
-          echo '<form action="insert_anuncio.php" method="POST">
-       
-          <select name="rol">';
-          $res = $mysqli->query($select_rol);
-                while($row = $res->fetch_object()){
-                    echo "
-                        <option value='".$row->COD_ROL."'>".$row->NOMBRE."</option>";
-                }
-        echo '  </select>';
-        echo '<br/><br/><br/><h1>Seleccionar USUARIO</h1>
-        <select name="usuario">';
-        $res = $mysqli->query($select_usuario);
-              while($row = $res->fetch_object()){
-                  echo "
-                      <option value='".$row->COD_USUARIO."'>".$row->NOMBRE.'  '.$row->CORREO_ELECTRONICO."</option>";
-              }
-        echo '  </select>';
-        
-        echo '<br/><br/><br/><br/><br/><br/><input type="submit" value="Enviar"></form>';
-        echo '';
-
+	
           
       ?>
       
