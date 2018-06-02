@@ -4,6 +4,10 @@
   $nombre_usuario=$_SESSION["nombre"];
   $perfil_usuario=$_SESSION["perfil"];
   $codigo_usuario=$_SESSION["codigo"]; 
+  if($_GET){
+	$curso=$_GET["Curso"];
+	//echo "<script>alert(".$curso.")</script>;";
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,10 +58,7 @@
 <body>
 <?php
 					include 'dbconnection.php';
-					if($_GET){
-						$curso=$_GET["Curso"];
-						//echo "<script>alert(".$curso.")</script>;";
-					}
+					
 					$select_curso="SELECT COD_CURSO FROM auv_curso WHERE COD_ASIGNATURA='".$curso."' AND COD_DOCENTE='".$codigo_usuario."';";
 					$res_curso = $mysqli->query($select_curso);
 					
@@ -88,8 +89,22 @@
 			<?php
          echo '<li class="active"><a href="tarea.php"><i class=" icon-graduation-cap"></i><span class="title">Tareas</span></a>';
          echo '<li ><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>';
-         echo '<li ><a href="anuncio.php"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
-         echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+		 
+		 //echo '<li ><a href="anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
+		 echo '<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+		 <ul class="nav collapse">';
+		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Anuncnio</span></a>
+			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }			
+		 
+		 echo'</ul>
+	 </li>';
+		 echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
       ?>		</ul>
 			</li>
 		</ul>

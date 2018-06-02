@@ -523,9 +523,15 @@ echo '
 								
 							</tr>
 						</thead>
-                        <tbody>';
-                        $select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND COD_DOCENTE='".$codigo_usuario."';";
+						<tbody>';
+						$select_cursos="";
+						if($perfil_usuario==="DOCENTE"){
+                        		$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND COD_DOCENTE='".$codigo_usuario."';";
+						}else if($perfil_usuario==="ALUMNO"){
+								$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A, auv_alumno_curso CA WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND C.COD_CURSO=CA.COD_CURSO AND COD_ALUMNO='".$codigo_usuario."';";
+						}
 						$res = $mysqli->query($select_cursos);
+
 						while($row = $res->fetch_object()){
 							echo '<tr>';
 							//<li><a href="updateuserform.php?ci='.$row->USU_CEDULA.'" >Editar</a></li>

@@ -2,7 +2,10 @@
 
   session_start();
   include 'dbconnection.php';
-	
+  if($_GET){
+	$curso=$_GET["Curso"];
+	//echo "<script>alert(".$curso.")</script>;";
+   }	
 
 ?>
 

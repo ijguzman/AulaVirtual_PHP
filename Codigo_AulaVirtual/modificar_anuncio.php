@@ -2,7 +2,13 @@
 
   session_start();
   include 'dbconnection.php';
+  $nombre_usuario=$_SESSION["nombre"];
+  $perfil_usuario=$_SESSION["perfil"];
+  $codigo_usuario=$_SESSION["codigo"]; 
+  if($_GET){
+	$curso=$_GET["curso"];
 	
+   }
 
 ?>
  
@@ -54,13 +60,15 @@
 <![endif]-->
 </head>
 <body>
+<?php
 
+?>
 <!-- Page container -->
 <div class="page-container">
 
 	<!-- Page Sidebar -->
 	<div class="page-sidebar">
-
+		
 		<!-- Site header  -->
 		<header class="site-header">
 		  <div class="site-logo"><a href="index.html"><img src="images/logo.jpg" alt="Mouldifi" title="Mouldifi"></a></div>
@@ -86,18 +94,7 @@
 			<li class="has-sub"><a href="panels.html"><i class="icon-newspaper"></i><span class="title">Evaluaciones</span></a>
 				<ul class="nav collapse">
 					<li><a href="evaluation.php"><span class="title">Resultados de Evaluaciones</span></a></li>
-					<!-- <li><a href="buttons.html"><span class="title">Buttons</span></a></li>
-					<li><a href="typography.html"><span class="title">Typography</span></a></li>
-					<li><a href="tabs-accordions.html"><span class="title">Tabs &amp; Accordions</span></a></li>
-					<li><a href="tooltips-popovers.html"><span class="title">Tooltips &amp; Popovers</span></a></li>
-					<li><a href="navbars.html"><span class="title">Navbars</span></a></li>
-					<li><a href="breadcrumbs.html"><span class="title">Breadcrumbs</span></a></li>
-					<li><a href="badges-label.html"><span class="title">Badges &amp; Labels</span></a></li>
-					<li><a href="progress-bars.html"><span class="title">Progress Bars</span></a></li>
-					<li><a href="modals.html"><span class="title">Modals</span></a></li>
-					<li><a href="alerts.html"><span class="title">Alerts</span></a></li>
-					<li><a href="pagination.html"><span class="title">Pagination</span></a></li>
-					<li><a href="video.html"><span class="title">Video</span></a></li> -->
+					
 				</ul>
 			</li>
 			<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
@@ -252,12 +249,7 @@
                                     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                                        <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                                        <span></span>
-                                                    </label>
-                                                </th>
+                                                
                                                 <th> Codigo Anuncio </th>
                                                 <th> Codigo Curso </th>
                                                 <th> Tema </th>
@@ -267,21 +259,24 @@
 											
 											
 											<?php
-											$link = mysqli_connect("localhost", "root", "", "aula virtual");
-											$sql="SELECT * from auv_anuncios";
-											$result=mysqli_query($link,$sql);
-											while($mostrar=mysqli_fetch_array($result)){}
-											
+											include 'dbconnection.php';
+											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
+											$sql="SELECT * from auv_anuncio A, auv_curso C, auv_docente D WHERE A.COD_CURSO=C.COD_CURSO AND C.COD_DOCENTE=D.COD_DOCENTE AND C.COD_ASIGNATURA='".$curso."' AND C.COD_DOCENTE='".$codigo_usuario."';";
+											//$mysqli->query($select_curso);
+											//$res_curso = $mysqli->query($select_curso);
+											$result=$mysqli->query($sql);
+											while($mostrar=$result->fetch_object()){
+												echo "<tr>";
+												echo "<td>".$mostrar->COD_ANUNCIO."</td>";
+												echo "<td>".$mostrar->COD_CURSO."</td>";
+												echo "<td>".$mostrar->TEMA."</td>";
+												echo "<td>".$mostrar->DESCRIPCION."</td>";
+												echo "<td>".$mostrar->FECHA."</td>";
+												echo "</tr>";
+											}
 											?>
-											<tr>
-											<td><?php echo $mostrar['COD_ANUNCIO'] ?> </td>
-											<td><?php echo $mostrar['COD_CURSO'] ?> </td>
-											<td><?php echo $mostrar['TEMA'] ?> </td>
-											<td> <?php echo $mostrar['DESCRIPCION'] ?></td>
-											<td><?php echo $mostrar['FECHA'] ?> </td>
-											
-											</tr>
-
+										
+										
 											
                                         </thead>
 										
