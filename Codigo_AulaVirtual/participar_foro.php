@@ -270,15 +270,14 @@
 											<?php
 											include 'dbconnection.php';
 											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
-											$sql_participaciones="SELECT FA.COD_FORO,FA.TEXT,FA.FECHA,A.NOMBRES,A.APELLIDOS FROM auv_foro_alumno FA,auv_alumno A
-WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro";";
-											//$mysqli->query($select_curso);
-											//$res_curso = $mysqli->query($select_curso);
+											$sql_participaciones="SELECT FA.COD_FORO,FA.TEXTO,FA.FECHA,A.NOMBRES,A.APELLIDOS FROM auv_foro_alumno FA,auv_alumno A
+WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
+											
 											$result=$mysqli->query($sql_participaciones);
 											while($mostrar=$result->fetch_object()){
 												echo "<tr>";
 												echo "<td>".$mostrar->NOMBRES.' '.$mostrar->APELLIDOS."</td>";
-												echo "<td>".$mostrar->PARTICIPACION."</td>";
+												echo "<td>".$mostrar->TEXTO."</td>";
 												echo "<td>".$mostrar->FECHA."</td>";
 												echo "</tr>";
 											}
@@ -289,14 +288,6 @@ WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro";";
                                         </thead>
 										
                                         <tbody>
-                                            
-
-											
-											<div class="comment-footer">
-											
-												<button class="btn btn-sm btn-success">CREAR</button>
-												<button class="btn btn-sm btn-red">CANCELAR</button>
-											</div>
 											
 										</li>
 										

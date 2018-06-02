@@ -263,7 +263,7 @@
 <?php
 											include 'dbconnection.php';
 											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
-											$sql="SELECT * FROM auv_foro AF,auv_curso C,auv_asignatura ASI, auv_alumno_curso AC WHERE
+											$sql="SELECT AF.COD_FORO,AF.TEMA,AF.DESCRIPCION FROM auv_foro AF,auv_curso C,auv_asignatura ASI, auv_alumno_curso AC WHERE
 												AF.COD_CURSO=C.COD_CURSO AND C.COD_CURSO=AC.COD_CURSO AND ASI.COD_ASIGNATURA=C.COD_ASIGNATURA
 												AND AC.COD_ALUMNO='".$codigo_usuario."' AND ASI.COD_ASIGNATURA='".$curso."';";
 											
