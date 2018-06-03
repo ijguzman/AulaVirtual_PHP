@@ -133,7 +133,7 @@
 <div class="header-secondary row gray-bg">
 		<div class="col-lg-12">
 			<div class="page-heading clearfix">
-				<h1 class="page-title pull-left">Usuarios</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
+				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
 			</div>
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb breadcrumb-2">
@@ -234,9 +234,10 @@
 </div>
 <!-- /page container -->
 
+
 <!--Basic Modal-->
 <div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
-<form id="newuser" method="post" action="newuser.php">
+<form id="tareaNueva" method="post" action="tareaNueva.php">
 	<div class="modal-dialog">
     <div class="modal-content">
       
@@ -244,33 +245,42 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Nueva Tarea</h4>
       </div>
-      
-					<div class="form-group">
-					<label for="emailaddress">Email</label>
-					<input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="Email">
-					</div>
-					<div class="form-group">
-					<label for="password">Password</label>
-					<input type="text" class="form-control" id="password" name="password" placeholder="Contraseña">
-					</div>
-					<div class="form-group">
-					<label for="firstname">Nombre</label>
-					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Nombre de usuario" onkeypress="generarClave()">
-					</div>
-					<div class="form-group">
-					<label for="rol">Rol</label>
-					<!--<input type="text" class="form-control" id="rol" name="rol" placeholder="Seleccione el rol">-->
-					<select id="rol_select" name="select_rol" onchange="generarClave()">;
-          <?php $res = $mysqli->query($select_rol);
-                while($row = $res->fetch_object()){
-                    echo '
-                        <option id="'.$row->COD_ROL.'" value="'.$row->NOMBRE.'">'.$row->NOMBRE."</option>";
-                }
+
+				<div class="form-group">
+					<label for="=Curso">Curso</label>
+					<select id="select_curso" name="select_curso">;
+          			
+          			<?php $res = $mysqli->query($select_curso);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_CURSO.'" value="'.$row->COD_CURSO.'">'.$row->COD_CURSO."</option>";
+                		}
         				echo '  </select>';?>
+				</div>
+
+					<div class="form-group">
+					<label for="tema">Tema</label>
+					<input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de la tarea">
 					</div>
+
+					<div class="form-group">
+					<label for="descripcion">Descripcion</label>
+					<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion de la tarea">
+					</div>
+
+					<div class="form-group">
+					<label for="fechainicio">Fecha de inicio</label>
+					<input type="Date" class="form-control" id="fechainicio" name="fechainicio">
+					</div>
+
+					<div class="form-group">
+					<label for="fechafin">Fecha de fin</label>
+					<input type="Date" class="form-control" id="fechafin" name="fechafin">
+					</div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" form="newuser" class="btn btn-primary">Guardar</button>
+        <button type="submit" form="tareaNueva" class="btn btn-primary">Guardar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
