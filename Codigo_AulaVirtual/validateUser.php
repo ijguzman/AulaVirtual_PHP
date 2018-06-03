@@ -45,7 +45,7 @@ if($_POST){
               $res_alu = $mysqli->query($sql_sesion);
               while ($row = $res_alu->fetch_object()) {
                 if(intval($seleccion_usuario[1]==intval($row->COD_ALUMNO))){
-                  $codigo_persona=$row->COD_DOCENTE;
+                  $codigo_persona=$row->COD_ALUMNO;
                   $nombres=$row->NOMBRES." ".$row->APELLIDOS;
                   $perfil="ALUMNO";
                 }
