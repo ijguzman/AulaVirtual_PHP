@@ -55,7 +55,7 @@ if($_POST){
             $_SESSION["codigo"] = $codigo_persona;
             $_SESSION["nombre"] = $nombres;
             $_SESSION["perfil"] = $perfil;
-            redirect("cursos_docente.php");
+            redirect("lista_cursos.php");
             
              
       }

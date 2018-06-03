@@ -93,8 +93,8 @@
 		 
 		 
 		 if($perfil_usuario==="DOCENTE"){
-			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
-			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
+			echo'<li ><a href="crear_foros.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			<li ><a href="modificar_foro.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
 			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
 			
 		 }else if($perfil_usuario==="ALUMNO"){
