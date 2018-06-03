@@ -166,7 +166,7 @@
 		<div class="col-lg-12">
 			<div class="filter-header">
 				<button aria-label="Close" class="close toggle-filter" type="button" data-block-id="filter-box"><i class="icon-cancel"></i></button>
-				<h3 class="title">Filtro de Usuarios</h3>
+				<h3 class="title">Filtro de Tareas</h3>
 			</div>
 			<form class="form-inline">
 				<div class="form-group">
