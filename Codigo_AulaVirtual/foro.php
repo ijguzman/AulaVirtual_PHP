@@ -520,7 +520,7 @@ echo '
 				</ul>
 			</div>
 			<div class="panel-body">
-				<form id="detail" method="post" action="#">
+				<form id="detail" method="get" action="#">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover dataTables-example" >
 						<thead>
@@ -545,7 +545,7 @@ echo '
                             echo '<td>'.$row->FECHA_INICIO.'</td>';
 							echo '<td>'.$row->FECHA_FIN.'</td>';
 							echo '<td>
-							<a class="btn btn-primary" href="borrarforo.php?id=<?php echo $row->COD_FORO;?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+							<a type="hidden" class="btn btn-primary" value="borrarforo.php?$id=<?php echo .$row->COD_FORO.;?>"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
 							</td>';
 							echo '</tr>';
 
