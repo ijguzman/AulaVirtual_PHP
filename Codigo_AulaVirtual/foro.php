@@ -1,19 +1,12 @@
-	<?php
-	require ('conexion.php');
-	
-	$query = "SELECT id_estado, estado FROM t_estado ORDER BY estado";
-	$resultado=$mysqli->query($query);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual | Anuncios</title>
+<title>Foros</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -37,19 +30,7 @@
 <!-- Mouldifi core stylesheet -->
 <link href="css/mouldifi-core.css" rel="stylesheet">
 <!-- /mouldifi core stylesheet -->
-
 <link href="css/mouldifi-forms.css" rel="stylesheet">
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="js/html5shiv.min.js"></script>
-      <script src="js/respond.min.js"></script>
-<![endif]-->
-
-<!--[if lte IE 8]>
-	<script src="js/plugins/flot/excanvas.min.js"></script>
-<![endif]-->
 </head>
 <body>
 
@@ -69,272 +50,31 @@
 
 		<!-- Main navigation -->
 		<ul id="side-nav" class="main-menu navbar-collapse collapse">
-			<li class="has-sub active "><a href="index.html"><i class="icon-gauge"></i><span class="title">Dashboard</span></a>
-				<ul class="nav">
-					<li class="active"><a href="index.html"><span class="title">Misc.</span></a></li>
-					<!--<li><a href="ecommerce-dashboard.html"><span class="title">E-Commerce</span></a></li>
-					<li><a href="news-dashboard.html"><span class="title">News Portal</span></a></li>-->
-				</ul>
-			</li>
-			<li><a href="users.php"><i class="icon-users"></i><span class="title">Usuarios</span></a>
-			</li>
-			<li ><a href="toolsMenu.php"><i class="icon-tools"></i><span class="title">Menú de Herramientas</span></a>
-
-
-			<li class="has-sub"><a href="panels.html"><i class="icon-newspaper"></i><span class="title">Evaluaciones</span></a>
-				<ul class="nav collapse">
-					<li><a href="evaluation.php"><span class="title">Resultados de Evaluaciones</span></a></li>
-					<!-- <li><a href="buttons.html"><span class="title">Buttons</span></a></li>
-					<li><a href="typography.html"><span class="title">Typography</span></a></li>
-					<li><a href="tabs-accordions.html"><span class="title">Tabs &amp; Accordions</span></a></li>
-					<li><a href="tooltips-popovers.html"><span class="title">Tooltips &amp; Popovers</span></a></li>
-					<li><a href="navbars.html"><span class="title">Navbars</span></a></li>
-					<li><a href="breadcrumbs.html"><span class="title">Breadcrumbs</span></a></li>
-					<li><a href="badges-label.html"><span class="title">Badges &amp; Labels</span></a></li>
-					<li><a href="progress-bars.html"><span class="title">Progress Bars</span></a></li>
-					<li><a href="modals.html"><span class="title">Modals</span></a></li>
-					<li><a href="alerts.html"><span class="title">Alerts</span></a></li>
-					<li><a href="pagination.html"><span class="title">Pagination</span></a></li>
-					<li><a href="video.html"><span class="title">Video</span></a></li> -->
-				</ul>
-			</li>
-			<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
-				<ul class="nav collapse">
-					<li><a href="evaluation.php"><span class="title">Crear anuncios</span></a></li>
-
-				</ul>
-			</li>
+		
+            <?php
+            echo '<li><a href="tarea.php"><i class=" icon-graduation-cap"></i><span class="title">Tareas</span></a>';
+            echo '<li class="active"><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>';
+            echo '<li ><a href="anuncio.php"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
+            echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+            ?>
+		</ul>
+		</li>
 		</ul>
 		<!-- /main navigation -->
   </div>
   <!-- /page sidebar -->
+	<!-- Main content -->
+	<div class="main-content">
 
-  <!-- Main container -->
-  <div class="main-container gray-bg">
 
-		<!-- Main header -->
-		<div class="main-header row">
-		  <div class="col-sm-6 col-xs-7">
-
-			<!-- User info -->
-			<ul class="user-info pull-left">
-			  <li class="profile-info dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="images/man-3.jpg">John Henderson <span class="caret"></span></a>
-
-				<!-- User action menu -->
-				<ul class="dropdown-menu">
-
-				  <!-- <li><a href="#/"><i class="icon-user"></i>My profile</a></li>
-				  <li><a href="#/"><i class="icon-mail"></i>Messages</a></li>
-				  <li><a href="#"><i class="icon-clipboard"></i>Tasks</a></li>
-				  <li class="divider"></li>
-				  <li><a href="#"><i class="icon-cog"></i>Account settings</a></li> -->
-				  <li><a href="logout.php"><i class="icon-logout"></i>Logout</a></li>
-				</ul>
-				<!-- /user action menu -->
-
-			  </li>
-			</ul>
-			<!-- /user info -->
-
-		  </div>
-
-		  <div class="col-sm-6 col-xs-5">
-			<div class="pull-right">
-				<!-- User alerts -->
-				<ul class="user-info pull-left">
-
-				  <!-- Notifications -->
-				  <li class="notifications dropdown">
-					<a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-attention"></i><span class="badge badge-info">6</span></a>
-					<ul class="dropdown-menu pull-right">
-						<li class="first">
-							<div class="small"><a class="pull-right danger" href="#">Mark all Read</a> You have <strong>3</strong> new notifications.</div>
-						</li>
-						<li>
-							<ul class="dropdown-list">
-								<li class="unread notification-success"><a href="#"><i class="icon-user-add pull-right"></i><span class="block-line strong">New user registered</span><span class="block-line small">30 seconds ago</span></a></li>
-								<li class="unread notification-secondary"><a href="#"><i class="icon-heart pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="unread notification-primary"><a href="#"><i class="icon-user pull-right"></i><span class="block-line strong">Privacy settings have been changed</span><span class="block-line small">2 hours ago</span></a></li>
-								<li class="notification-danger"><a href="#"><i class="icon-cancel-circled pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="notification-info"><a href="#"><i class="icon-info pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="notification-warning"><a href="#"><i class="icon-rss pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-							</ul>
-						</li>
-						<li class="external-last"> <a href="#" class="danger">View all notifications</a> </li>
-					</ul>
-				  </li>
-				  <!-- /notifications -->
-
-				  <!-- Messages -->
-				  <li class="notifications dropdown">
-					<a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-mail"></i><span class="badge badge-secondary">12</span></a>
-					<ul class="dropdown-menu pull-right">
-						<li class="first">
-							<div class="dropdown-content-header"><i class="fa fa-pencil-square-o pull-right"></i> Messages</div>
-						</li>
-						<li>
-							<ul class="media-list">
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/domnic-brown.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Domnic Brown</span>
-											<span class="media-annotation pull-right">Tue</span>
-										</a>
-										<span class="text-muted">Your product sounds interesting I would love to check this ne...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/john-smith.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">John Smith</span>
-											<span class="media-annotation pull-right">12:30</span>
-										</a>
-										<span class="text-muted">Thank you for posting such a wonderful content. The writing was outstanding...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/stella-johnson.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Stella Johnson</span>
-											<span class="media-annotation pull-right">2 days ago</span>
-										</a>
-										<span class="text-muted">Thank you for trusting us to be your source for top quality sporting goods...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/alex-dolgove.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Alex Dolgove</span>
-											<span class="media-annotation pull-right">10:45</span>
-										</a>
-										<span class="text-muted">After our Friday meeting I was thinking about our business relationship and how fortunate...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/domnic-brown.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Domnic Brown</span>
-											<span class="media-annotation pull-right">4:00</span>
-										</a>
-										<span class="text-muted">I would like to take this opportunity to thank you for your cooperation in recently completing...</span>
-									</div>
-								</li>
-							</ul>
-						</li>
-						<li class="external-last"> <a class="danger" href="#">All Messages</a> </li>
-					</ul>
-				  </li>
-				  <!-- /messages -->
-
-				</ul>
-				<!-- /user alerts -->
-
-			</div>
-		  </div>
-		</div>
-		<!-- /main header -->
-		<div class="row">
-						<div class="col-lg-12 animatedParent animateOnce z-index-46">
-							<div class="panel panel-default animated fadeInUp">
-								<div class="panel-body">
-									<h2>Anuncios</h2>
-									<ul class="comments-list removeable-list">
-										<li>
-											<form name="contactform" method="post" action="crearanuncio.php"> 
-<table width="450px"><!---Este tamaño en px es personalizable -->
-<tr>
- <td valign="top">
-  <label for="cod_anuncio">Codigo Anuncio *</label>
- </td>
- <td valign="top">
- 
-  <input  type="text" name="cod_anuncio" maxlength="50" size="30">
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="cod_curso">Codigo Curso  *</label>
- </td>
- <td valign="top">
- <id="combo" name="combo" action="guardaanuncio.php" method="POST">
-			<div> <select name="cbx_curso" id="cbx_estado">
-				<option value="0">Seleccionar Curso</option>
-				<?php while($row = $resultado->fetch_assoc()) { ?>
-					<option value="<?php echo $row['cod_curso']; ?>"><?php echo $row['curso']; ?></option>
-				<?php } ?>
-
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="tema">Tema *</label>
- </td>
- <td valign="top">
-  <input  type="text" name="tema" maxlength="80" size="30">
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="fecha">Fecha *</label>
- </td>
- <td valign="top">
- <input id="date" type="date">
-
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="message">Mensaje *</label>
- </td>
- <td valign="top">
-  <textarea  name="message" maxlength="1000" cols="25" rows="6"></textarea>
- </td>
-</tr>
-<tr>
-<!--  <td colspan="2" style="text-align:center">
-  <input type="submit" value="Crear">   
- </td> -->
-</tr>
-</table>
-</form>
-											
-											<div class="comment-footer">
-												<button class="btn btn-sm btn-success">CREAR</button>
-												<button class="btn btn-sm btn-red">CANCELAR</button>
-											</div>
-											
-										</li>
-										
-										
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-		<!-- Main content -->
-
-			<!-- Footer -->
-			<footer class="animatedParent animateOnce z-index-10">
-				<div class="footer-main animated fadeInUp slow">&copy; 2018 <strong>EEUIO</strong> by <a target="_blank" href="#/">KAY Innovation</a> </div>
-			</footer>
-			<!-- /footer -->
 
 	  </div>
 	  <!-- /main content -->
 
-  </div>
-  <!-- /main container -->
 
-</div>
-<!-- /page container -->
+</body>
 
-<!--Load JQuery-->
+  <!--Load JQuery-->
 <script src="js/jquery.min.js"></script>
 <!-- Load CSS3 Animate It Plugin JS -->
 <script src="js/plugins/css3-animate-it-plugin/css3-animate-it.js"></script>
@@ -350,11 +90,54 @@
 <script src="js/plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="js/plugins/flot/jquery.flot.time.min.js"></script>
 <script src="js/functions.js"></script>
+<!--Load JQuery-->
+<script src="js/jquery.min.js"></script>
+<!-- Load CSS3 Animate It Plugin JS -->
+<script src="js/plugins/css3-animate-it-plugin/css3-animate-it.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metismenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/blockui-master/jquery-ui.js"></script>
+<script src="js/plugins/blockui-master/jquery.blockUI.js"></script>
+<script src="js/functions.js"></script>
+
+<script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="js/plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="js/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+<script src="js/plugins/datatables/jszip.min.js"></script>
+<script src="js/plugins/datatables/pdfmake.min.js"></script>
+<script src="js/plugins/datatables/vfs_fonts.js"></script>
+<script src="js/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
+<script src="js/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
 
 <!--ChartJs-->
 <script src="js/plugins/chartjs/Chart.min.js"></script>
 <script>
+
 	$(document).ready(function () {
+		$('.dataTables-example').DataTable({
+			dom: '<"html5buttons" B>lTfgitp',
+			buttons: [
+				{
+					extend: 'copyHtml5',
+					exportOptions: {
+						columns: [ 0, ':visible' ]
+					}
+				},
+				{
+					extend: 'excelHtml5',
+					exportOptions: {
+						columns: ':visible'
+					}
+				},
+				{
+					extend: 'pdfHtml5',
+					exportOptions: {
+						columns: [ 0, 1, 2, 3, 4, 5 ]
+					}
+				},
+				'colvis'
+			]
+		});
 		var $checkbox = $('.todo-list .checkbox input[type=checkbox]');
 
 		$checkbox.change(function () {
@@ -394,11 +177,6 @@
 							day + ' ' + month + ',' + year
 							+ " : <strong>" + y +
 							" visitors</strong>");
-
-					/*content = item.series.label + ' = ' + item.datapoint[1];
-					 showTooltip(item.pageX, item.pageY, content);
-					 showTooltip(item.pageX, item.pageY, y + ' visitors at ' + x + '.00h');*/
-
 				}
 			} else {
 				$('#flotTip').remove();
@@ -721,5 +499,120 @@
 		canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
 	});
 </script>
-</body>
+
 </html>
+
+
+<?php
+include 'dbconnection.php';
+include 'redirect.php';
+echo '
+<h1 class="page-title pull-left">Foros</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
+<!-- Breadcrumb -->
+<div class="row">
+	<div class="col-lg-12 animatedParent animateOnce z-index-50">
+		<div class="panel panel-default animated fadeInUp">
+			<div class="panel-heading clearfix">
+				<ul class="panel-tool-options">
+					<li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+					<li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+					<li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+				</ul>
+			</div>
+			<div class="panel-body">
+				<form id="detail" method="POST" action="#">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered table-hover dataTables-example" >
+						<thead>
+							<tr>
+								<th>Código del foro</th>
+								<th>Código del curso</th>
+								<th>Tema</th>
+								<th>Descripción</th>
+								<th>Fecha de inicio</th>
+								<th>Fecha de finalización</th>
+								<th>Borrar</th>
+							</tr>
+						</thead>
+						<tbody>';
+						$res = $mysqli->query($select_foro);
+						while($row = $res->fetch_object()){
+							echo '<tr>';
+							echo '<td>'.$row->COD_FORO.'</td>';
+							echo '<td>'.$row->COD_CURSO.'</td>';
+							echo '<td>'.$row->TEMA.'</td>';
+							echo '<td>'.$row->DESCRIPCION.'</td>';
+                            echo '<td>'.$row->FECHA_INICIO.'</td>';
+							echo '<td>'.$row->FECHA_FIN.'</td>';
+							echo '<td>';
+							echo '<a class="btn btn-primary" class="btn btn-primary" href="borrarforo.php?id='.$row->COD_FORO.'"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
+							echo '</td>';
+							echo '</tr>';
+
+	          			}
+
+	echo '</tbody>
+	</table>
+	</div>
+	</form>
+	</div>
+	</div>
+	</div>
+    </div>
+    <!-- Footer -->
+		<footer class="animatedParent animateOnce z-index-10">
+			<div class="footer-main animated fadeInUp slow">&copy; 2018 <strong>EEUIO</strong> by <a target="_blank" href="#/">KAY Innovation</a> </div>
+		</footer>
+        <!-- /footer -->';
+    
+
+        echo '
+        <!--Basic Modal-->
+        <div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
+        <form id="nuevoforo" method="post" action="nuevoforo.php">
+            <div class="modal-dialog">
+            <div class="modal-content">
+              
+                    <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nuevo Foro</h4>
+              </div>
+              <div class="form-group">
+              <label for="curso">Curso</label>
+              <select name="curso" id="curso">';
+              $res = $mysqli->query($select_curso);
+                    while($row = $res->fetch_object()){
+                        echo "
+                            <option value='".$row->COD_CURSO."'>".$row->COD_CURSO."</option>";
+                    }
+            echo '  </select>
+                    </div>
+                            <div class="form-group">
+                            <label for="tema">Tema</label>
+                            <input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de debate">
+                            </div>
+                            <div class="form-group">
+                            <label for="descripcion">Descripcion</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripción del foro">
+                            </div>
+                            <div class="form-group">
+                            <label for="fechainicio">Fecha de inicio</label>
+                            <input type="Date" class="form-control" id="fechainicio" name="fechainicio">
+                            </div>
+                            <div class="form-group">
+                            <label for="fechafin">Fecha de fin</label>
+                            <input type="Date" class="form-control" id="fechafin" name="fechafin">
+                            </div>';
+
+              echo ' <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" form="nuevoforo" class="btn btn-primary">Guardar</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        
+            </form>
+        </div><!-- /.modal -->
+        <!--End Basic Modal-->';
+
+?>

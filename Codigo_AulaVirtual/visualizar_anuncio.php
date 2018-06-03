@@ -1,10 +1,18 @@
-	<?php
-	require ('conexion.php');
+<?php
+
+  session_start();
+  include 'dbconnection.php';
+  $nombre_usuario=$_SESSION["nombre"];
+  $perfil_usuario=$_SESSION["perfil"];
+  $codigo_usuario=$_SESSION["codigo"]; 
+  if($_GET){
+	$curso=$_GET["curso"];
 	
-	$query = "SELECT id_estado, estado FROM t_estado ORDER BY estado";
-	$resultado=$mysqli->query($query);
+   }
+
 ?>
-<!DOCTYPE html>
+ 
+<html>
 <html lang="en">
 <head>
 
@@ -52,13 +60,15 @@
 <![endif]-->
 </head>
 <body>
+<?php
 
+?>
 <!-- Page container -->
 <div class="page-container">
 
 	<!-- Page Sidebar -->
 	<div class="page-sidebar">
-
+		
 		<!-- Site header  -->
 		<header class="site-header">
 		  <div class="site-logo"><a href="index.html"><img src="images/logo.jpg" alt="Mouldifi" title="Mouldifi"></a></div>
@@ -84,23 +94,14 @@
 			<li class="has-sub"><a href="panels.html"><i class="icon-newspaper"></i><span class="title">Evaluaciones</span></a>
 				<ul class="nav collapse">
 					<li><a href="evaluation.php"><span class="title">Resultados de Evaluaciones</span></a></li>
-					<!-- <li><a href="buttons.html"><span class="title">Buttons</span></a></li>
-					<li><a href="typography.html"><span class="title">Typography</span></a></li>
-					<li><a href="tabs-accordions.html"><span class="title">Tabs &amp; Accordions</span></a></li>
-					<li><a href="tooltips-popovers.html"><span class="title">Tooltips &amp; Popovers</span></a></li>
-					<li><a href="navbars.html"><span class="title">Navbars</span></a></li>
-					<li><a href="breadcrumbs.html"><span class="title">Breadcrumbs</span></a></li>
-					<li><a href="badges-label.html"><span class="title">Badges &amp; Labels</span></a></li>
-					<li><a href="progress-bars.html"><span class="title">Progress Bars</span></a></li>
-					<li><a href="modals.html"><span class="title">Modals</span></a></li>
-					<li><a href="alerts.html"><span class="title">Alerts</span></a></li>
-					<li><a href="pagination.html"><span class="title">Pagination</span></a></li>
-					<li><a href="video.html"><span class="title">Video</span></a></li> -->
+					
 				</ul>
 			</li>
 			<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
 				<ul class="nav collapse">
-					<li><a href="evaluation.php"><span class="title">Crear anuncios</span></a></li>
+					<li><a href="anuncios.php"><span class="title">Crear anuncios</span></a></li>
+					<li><a href="anuncios.php"><span class="title">Modificar anuncios</span></a></li>
+					<li><a href="anuncios.php"><span class="title">Visualizar anuncios</span></a></li>
 
 				</ul>
 			</li>
@@ -238,72 +239,53 @@
 		  </div>
 		</div>
 		<!-- /main header -->
-		<div class="row">
-						<div class="col-lg-12 animatedParent animateOnce z-index-46">
-							<div class="panel panel-default animated fadeInUp">
-								<div class="panel-body">
-									<h2>Anuncios</h2>
-									<ul class="comments-list removeable-list">
-										<li>
-											<form name="contactform" method="post" action="crearanuncio.php"> 
-<table width="450px"><!---Este tamaño en px es personalizable -->
-<tr>
- <td valign="top">
-  <label for="cod_anuncio">Codigo Anuncio *</label>
- </td>
- <td valign="top">
- 
-  <input  type="text" name="cod_anuncio" maxlength="50" size="30">
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="cod_curso">Codigo Curso  *</label>
- </td>
- <td valign="top">
- <id="combo" name="combo" action="guardaanuncio.php" method="POST">
-			<div> <select name="cbx_curso" id="cbx_estado">
-				<option value="0">Seleccionar Curso</option>
-				<?php while($row = $resultado->fetch_assoc()) { ?>
-					<option value="<?php echo $row['cod_curso']; ?>"><?php echo $row['curso']; ?></option>
-				<?php } ?>
 
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="tema">Tema *</label>
- </td>
- <td valign="top">
-  <input  type="text" name="tema" maxlength="80" size="30">
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="fecha">Fecha *</label>
- </td>
- <td valign="top">
- <input id="date" type="date">
+	                           <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption font-dark">
+                                        <i class="icon-settings font-dark"></i>
+                                  <h2>Modificar Anuncios</h2>
+                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                                        <thead>
+                                            <tr>
+                                                
+                                                <th> Codigo Anuncio </th>
+                                                <th> Codigo Curso </th>
+                                                <th> Tema </th>
+                                                <th> Descripcion </th>
+                                                <th> Fecha </th>
+                                            </tr>
+											
+											
+											<?php
+											include 'dbconnection.php';
+											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
+											$sql="SELECT * from auv_anuncio A, auv_curso C, auv_docente D WHERE A.COD_CURSO=C.COD_CURSO AND C.COD_DOCENTE=D.COD_DOCENTE AND C.COD_ASIGNATURA='".$curso."' AND C.COD_DOCENTE='".$codigo_usuario."';";
+											//$mysqli->query($select_curso);
+											//$res_curso = $mysqli->query($select_curso);
+											$result=$mysqli->query($sql);
+											while($mostrar=$result->fetch_object()){
+												echo "<tr>";
+												echo '<td><a href="modificar_anuncio.php?anuncio='.$mostrar->COD_ANUNCIO.'">'.$mostrar->COD_ANUNCIO."</a></td>";
+												echo "<td>".$mostrar->COD_CURSO."</td>";
+												echo "<td>".$mostrar->TEMA."</td>";
+												echo "<td>".$mostrar->DESCRIPCION."</td>";
+												echo "<td>".$mostrar->FECHA."</td>";
+												echo "</tr>";
+											}
+											?>
+										
+										
+											
+                                        </thead>
+										
+                                        <tbody>
+                                            
 
- </td>
-</tr>
-<tr>
- <td valign="top">
-  <label for="message">Mensaje *</label>
- </td>
- <td valign="top">
-  <textarea  name="message" maxlength="1000" cols="25" rows="6"></textarea>
- </td>
-</tr>
-<tr>
-<!--  <td colspan="2" style="text-align:center">
-  <input type="submit" value="Crear">   
- </td> -->
-</tr>
-</table>
-</form>
 											
 											<div class="comment-footer">
+											
 												<button class="btn btn-sm btn-success">CREAR</button>
 												<button class="btn btn-sm btn-red">CANCELAR</button>
 											</div>
@@ -317,13 +299,19 @@
 						</div>
 					</div>
 					<div class="row">
+							</script>
+	<?php
+          include 'dbconnection.php';
+          echo '<form action="insert_rol_usuario.php" method="POST">
+
+         <input type="submit" value="Enviar"></form>';
+        echo '';
+
+          
+      ?>
 		<!-- Main content -->
 
-			<!-- Footer -->
-			<footer class="animatedParent animateOnce z-index-10">
-				<div class="footer-main animated fadeInUp slow">&copy; 2018 <strong>EEUIO</strong> by <a target="_blank" href="#/">KAY Innovation</a> </div>
-			</footer>
-			<!-- /footer -->
+				
 
 	  </div>
 	  <!-- /main content -->
@@ -720,6 +708,9 @@
 		});
 		canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
 	});
+
 </script>
 </body>
+</html>
+
 </html>
