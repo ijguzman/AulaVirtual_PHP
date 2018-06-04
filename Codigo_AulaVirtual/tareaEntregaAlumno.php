@@ -215,7 +215,7 @@
 					<tbody id="tableusers">
 					<?php
 
-					$res = $mysqli->query($sql_envio);
+					$res = $mysqli->query($select_tarea);
 					while($row = $res->fetch_object()){
 						echo '<tr>';
 									//echo '<td class="size-40"><div class="form-checkbox"><input type="checkbox" name="name1" value="value1"> <span class="check"><i class="fa fa-check"></i></span></div></td>';
@@ -281,6 +281,20 @@
         <h4 class="modal-title">Enviar Tarea</h4>
       </div>
 
+
+      			<div class="form-group">
+					<label for="=Curso">Tarea</label>
+					<select id="select_tarea" name="select_tarea">;
+          			
+          			<?php $res = $mysqli->query($select_tarea);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_TAREA.'" value="'.$row->COD_TAREA.'">'.$row->COD_TAREA."</option>";
+                		}
+        				echo '  </select>';?>
+				</div>
+
+
 				<div class="form-group">
 					<label for="=Curso">Curso</label>
 					<select id="select_curso" name="select_curso">;
@@ -294,23 +308,18 @@
 				</div>
 
 					<div class="form-group">
-					<label for="tema">Tema</label>
-					<input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de la tarea">
+					<label for="texto">Texto</label>
+					<input type="text" class="form-control" id="texto" name="texto" placeholder="Titulo de Texto">
 					</div>
 
 					<div class="form-group">
-					<label for="descripcion">Descripcion</label>
-					<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion de la tarea">
+					<label for="date">Fecha de Envio</label>
+					<input type="Date" class="form-control" id="date" name="date" placeholder="Fecha de Envio">
 					</div>
 
 					<div class="form-group">
-					<label for="fechainicio">Fecha de inicio</label>
-					<input type="Date" class="form-control" id="fechainicio" name="fechainicio">
-					</div>
-
-					<div class="form-group">
-					<label for="fechafin">Fecha de fin</label>
-					<input type="Date" class="form-control" id="fechafin" name="fechafin">
+					<label for="archivo">Archivo</label>
+					<input type="Text" class="form-control" id="archivo" name="archivo">
 					</div>
 
       <div class="modal-footer">
