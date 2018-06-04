@@ -6,8 +6,8 @@
   $codigo_usuario=$_SESSION["codigo"]; 
   if($_GET){
 	$curso=$_GET["Curso"];
-	//echo "<script>alert(".$curso.")</script>;";
-	}
+	$nrc=$_GET["Nrc"];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,6 +119,9 @@
 		 echo'</ul>
 	 </li>';
 		 echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+		 if($perfil_usuario==="DOCENTE"){
+			echo '<li ><a href="notificaciones.php?Nrc='.$nrc.'"><i class=" icon-graduation-cap"></i><span class="title">Enviar notificaciones</span></a>';
+		}
       ?>		</ul>
 			</li>
 		</ul>

@@ -1,11 +1,10 @@
 <?php
-  session_start();
-  include 'dbconnection.php';
-  $nombre_usuario=$_SESSION["nombre"];
-  $perfil_usuario=$_SESSION["perfil"];
-  $codigo_usuario=$_SESSION["codigo"]; 
+    include "ws_core.php";
+    include 'dbconnection.php';
+    error_reporting(0);
 ?>
 <!DOCTYPE html>
+<!-- write your code here -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -13,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual - Notificaciones</title>
+<title>Crear Cursos Core</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -38,32 +37,92 @@
 <link href="css/mouldifi-core.css" rel="stylesheet">
 <!-- /mouldifi core stylesheet -->
 
+<link href="css/plugins/select2/select2.css" rel="stylesheet">
 <link href="css/mouldifi-forms.css" rel="stylesheet">
 
 
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+<![endif]-->
+
 </head>
 <body>
-
 <!-- Page container -->
 <div class="page-container">
 
-	<!-- Page Sidebar -->
-	<div class="page-sidebar">
+  <!-- Page sidebar -->
+  <div class="page-sidebar">
 
-		<!-- Site header  -->
-		
-	<!-- Main content -->
-	<div class="main-content">
+  		<!-- Site header  -->
+		<header class="site-header">
+		  <div class="site-logo"><a href="index.html"><img src="images/logo.jpg" alt="Mouldifi" title="Mouldifi"></a></div>
+		  <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
+		  <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
+		</header>
+		<!-- /site header -->
 
+		<!-- Main navigation -->
+		<ul id="side-nav" class="main-menu navbar-collapse collapse">
 
+      <!-- <li class="has-sub"><a href="index.html"><i class="icon-gauge"></i><span class="title">Dashboard</span></a>
+				<ul class="nav collapse">
+					<li><a href="index.html"><span class="title">Misc.</span></a></li>
+				</ul>
+			</li> -->
 
-	  </div>
-	  <!-- /main content -->
+      <?php
+         echo '<li ><a href="user.php"><i class=" icon-graduation-cap"></i><span class="title">Gestionar usuarios</span></a>';
+         echo '<li class="active"><a href="rol_a_persona.php"><i class="icon-pencil"></i><span class="title">Asignar Rol a Persona</span></a>';
+         echo '<li ><a href="evaluation.php"><i class=" icon-graduation-cap"></i><span class="title">Lista de usuarios</span></a>';
+      ?>
+      
+		</ul>
+		<!-- /main navigation -->
+  </div>
+  <!-- /page sidebar -->
 
+  <!-- Main container -->
+  <div class="main-container">
 
-</body>
+	<!-- Main header -->
+	<div class="main-header row gray-bg">
+      <div class="col-sm-6 col-xs-7">
 
+		<!-- User info -->
+        <ul class="user-info pull-left">
+          <li class="profile-info dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="images/man-3.jpg"> <span class="caret"></span></a>
+
+			<!-- User action menu -->
+            <ul class="dropdown-menu">
+
+              <!-- <li><a href="#/"><i class="icon-user"></i>My profile</a></li>
+              <li><a href="#/"><i class="icon-mail"></i>Messages</a></li>
+              <li><a href="#"><i class="icon-clipboard"></i>Tasks</a></li>
+			  <li class="divider"></li>
+			  <li><a href="#"><i class="icon-cog"></i>Account settings</a></li> -->
+			       <li><a href="logout.php" ><i class="icon-logout"></i>Logout</a></li>
+            </ul>
+			<!-- /user action menu -->
+
+          </li>
+        </ul>
+		<!-- /user info -->
+
+      </div>
+
+      <div class="col-sm-6 col-xs-5">
+	  	<div class="pull-right">
+			
+		</div>
+      </div>
+    </div>
+	<!-- /main header -->
+    </body>
   <!--Load JQuery-->
+
 <script src="js/jquery.min.js"></script>
 <!-- Load CSS3 Animate It Plugin JS -->
 <script src="js/plugins/css3-animate-it-plugin/css3-animate-it.js"></script>
@@ -495,65 +554,93 @@
 </script>
 </html>
 
-<?php
-include 'dbconnection.php';
-
-
-echo '
-<h1 class="page-title">BIENVENIDO '.$nombre_usuario.' '.$perfil_usuario.' </h1>
-<!-- Breadcrumb -->
-<div class="row">
-	<div class="col-lg-12 animatedParent animateOnce z-index-50">
-		<div class="panel panel-default animated fadeInUp">
-			<div class="panel-heading clearfix">
-				<ul class="panel-tool-options">
-					<li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
-					<li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
-					<li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
-				</ul>
-			</div>
-			<div class="panel-body">
-				
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover dataTables-example" >
-						<thead>
-							<tr>
-								<th>NRC</th>
-								<th>ASIGNATURA</th>
-								
-							</tr>
-						</thead>
-						<tbody>';
-						$select_cursos="";
-						if($perfil_usuario==="DOCENTE"){
-                        		$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,C.COD_CURSO AS NRC,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND COD_DOCENTE='".$codigo_usuario."';";
-						}else if($perfil_usuario==="ALUMNO"){
-								$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,C.COD_CURSO AS NRC,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A, auv_alumno_curso CA WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND C.COD_CURSO=CA.COD_CURSO AND COD_ALUMNO='".$codigo_usuario."';";
-						}
-						$res = $mysqli->query($select_cursos);
-
-						while($row = $res->fetch_object()){
-							echo '<tr>';
-							//<li><a href="updateuserform.php?ci='.$row->USU_CEDULA.'" >Editar</a></li>
-							echo "<td><a href='tarea.php?Curso=".$row->CURSO."&Nrc=".$row->NRC."'>".$row->NRC."</a></td>";
-							echo '<td>'.$row->NOMBRE.'</td>';
-							echo '</tr>';
-	          			}
-
-	echo '</tbody>
-	<tfoot>
-	<tr>
-    <th>NRC</th>
-    <th>ASIGNATURA</th>
-	</tr>
-	</tfoot>
-	</table>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>';
-
-
-
+	<?php
+          
+          echo '<form action="ws_notificaciones_enviar.php" method="POST">';
+        echo '
+        <!-- Breadcrumb -->
+        <div class="row">
+            <div class="col-lg-12 animatedParent animateOnce z-index-50">
+                <div class="panel panel-default animated fadeInUp">
+                    <div class="panel-heading clearfix">
+                        <ul class="panel-tool-options">
+                            <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                            <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                            <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTables-example" >
+                                <thead>
+                                    <tr>
+                                        <th>NRC</th>
+                                        <th>ASIGNATURA</th>
+                                        <th>DOCENTE</th>
+                                    </tr>
+                                </thead>
+                                <tbody>';
+                                
+                                foreach($nrcs as $nrc){
+                                    echo '<tr id="fila">';
+                                    echo '<td><a href="ws_core_alumnos.php?nrc='.$nrc->nrcPK->codNrc.'">'.$nrc->nrcPK->codNrc.'</a></td>';
+                                    echo '<td>'.$nrc->codAsignatura->nombre.'</td>';
+                                    echo '<td>'.$nrc->codDocente->nombres.' '.$nrc->codDocente->apellidos.'</td>';
+                                    echo '</tr>';
+                                }
+                                    
+        
+            echo '</tbody>
+            <tfoot>
+            <tr>
+            <th>NRC</th>
+            <th>ASIGNATURA</th>
+            <th>DOCENTE</th>
+            
+            </tr>
+            </tfoot>
+            </table>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>';
+        
+        echo '<br/><br/><br/><br/><br/><br/>
+        <input type="submit" value="Cargar alumnos" onclick="cargar_alumnos()">';
 ?>
+<script>
+    function cargar_alumnos(){
+        var result = [];
+        var i = 0;
+        $("input[type=checkbox]:checked").each(function(){
+        
+        
+        
+        // buscamos el td más cercano en el DOM hacia "arriba"
+        // luego encontramos los td adyacentes a este
+        $(this).closest('td').siblings().each(function(){
+
+        // obtenemos el texto del td 
+            if($(this).attr('id')=="columna"){
+            result[i] = $(this).text();
+             ++i;
+            }
+        });
+        
+        }); 
+        var resultado="";
+        for(var i=0;i<result.length;i++){
+            if(i!=(result.length-1))
+                resultado+=result[i]+"¬";
+            else
+                resultado+=result[i];
+        }
+        $("#Lista_alumnos").val(resultado);
+        //alert($("#Lista_alumnos").val());
+    } 
+</script>
+      
+
+
