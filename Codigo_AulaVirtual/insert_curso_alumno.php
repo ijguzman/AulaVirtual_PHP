@@ -12,7 +12,7 @@ if($_POST){
     VALUES ('".$curso."','".$cod_alumno."')";
   
     if ($mysqli->query($sql) === TRUE) {
-        echo "siii";
+        redirect("curso_alumno.php");
     } else {
         echo "Error: " . $sql . "<br>" . $mysqli->error;
     }
