@@ -136,12 +136,12 @@
 <div class="header-secondary row gray-bg">
 		<div class="col-lg-12">
 			<div class="page-heading clearfix">
-				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
+				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">ENVIAR</button>
 			</div>
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb breadcrumb-2">
-				<li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-				<li class="active"><strong>Users</strong></li>
+				<li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+				<li class="active"><strong>Tareas</strong></li>
 			</ol>
 			<div class="tab-wrapper clearfix">
         <!--
@@ -198,6 +198,7 @@
 								<th>Descripcion</th>
 								<th>Fecha de publicación</th>
 								<th>Fecha límite</th>
+								<th>Borrar</th>
 				</thead>
 					<tbody id="tableusers">
 					<?php
@@ -211,8 +212,12 @@
 						echo '<td><strong>'.$row->TEMA.'</strong></td>';
 						echo '<td>'.$row->DESCRIPCION.'</td>';
 						echo '<td>'.$row->FECHA_FIN.'</td>';
-						echo '<td>'.$row->FECHA_FIN.'</td>
-						</tr>';
+						echo '<td>'.$row->FECHA_FIN.'</td>';
+						echo '<td>';
+						echo '<a class="btn btn-primary" class="btn btn-primary" href="borrarforo.php?id='.$row->COD_TAREA.'"><i 
+							class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
+						echo '</td>';
+						echo '</tr>';
 
 					}
 

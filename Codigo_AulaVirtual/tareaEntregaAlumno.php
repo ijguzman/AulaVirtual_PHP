@@ -6,7 +6,7 @@
   $perfil_usuario=$_SESSION["perfil"];
   $codigo_usuario=$_SESSION["codigo"]; 
   if($_GET){
-	$cod_foro=$_GET["foro"];
+	$cod_tarea=$_GET["tarea"];
 	
    }
 
@@ -21,7 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual | Foros</title>
+<title>Aula Virtual | Tareas</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -62,7 +62,24 @@
 <body>
 <?php
 
+	include 'dbconnection.php';
+					
+		$select_curso="SELECT COD_CURSO FROM auv_curso WHERE COD_ASIGNATURA='".$curso."' 
+		AND COD_DOCENTE='".$codigo_usuario."';";
+		$res_curso = $mysqli->query($select_curso);
+					
+		while($row = $res_curso->fetch_object()){
+			$cod_curso=$row->COD_CURSO;
+		//echo "<script>alert(".$cod_curso.")</script>;";
+			}
+		$select_tarea="SELECT * FROM auv_tarea WHERE COD_CURSO='".$cod_curso."';";
+
+		$sql_envio="SELECT T.COD_TAREA, A.COD_ALUMNO FROM auv_entrega_tarea T,
+		auv_alumno A WHERE T.COD_ALUMNO=A.COD_ALUMNO AND COD_TAREA=".$cod_tarea.";";
+
 ?>
+
+
 <!-- Page container -->
 <div class="page-container">
 
@@ -75,7 +92,8 @@
 		  <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
 		  <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
 		</header>
-		<!-- /site header -->
+		<!-- /site header -->	
+
 
 		<!-- Main navigation -->
 		<ul id="side-nav" class="main-menu navbar-collapse collapse">
@@ -120,212 +138,127 @@
   </div>
   <!-- /page sidebar -->
 
+
   <!-- Main container -->
   <div class="main-container gray-bg">
 
-		<!-- Main header -->
-		<div class="main-header row">
-		  <div class="col-sm-6 col-xs-7">
 
-			<!-- User info -->
-			<ul class="user-info pull-left">
-			  <li class="profile-info dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="images/man-3.jpg">John Henderson <span class="caret"></span></a>
+		  	<!-- Main content -->
 
-				<!-- User action menu -->
-				<ul class="dropdown-menu">
-
-				  <!-- <li><a href="#/"><i class="icon-user"></i>My profile</a></li>
-				  <li><a href="#/"><i class="icon-mail"></i>Messages</a></li>
-				  <li><a href="#"><i class="icon-clipboard"></i>Tasks</a></li>
-				  <li class="divider"></li>
-				  <li><a href="#"><i class="icon-cog"></i>Account settings</a></li> -->
-				  <li><a href="logout.php"><i class="icon-logout"></i>Logout</a></li>
-				</ul>
-				<!-- /user action menu -->
-
-			  </li>
-			</ul>
-			<!-- /user info -->
-
-		  </div>
-
-		  <div class="col-sm-6 col-xs-5">
-			<div class="pull-right">
-				<!-- User alerts -->
-				<ul class="user-info pull-left">
-
-				  <!-- Notifications -->
-				  <li class="notifications dropdown">
-					<a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-attention"></i><span class="badge badge-info">6</span></a>
-					<ul class="dropdown-menu pull-right">
-						<li class="first">
-							<div class="small"><a class="pull-right danger" href="#">Mark all Read</a> You have <strong>3</strong> new notifications.</div>
-						</li>
-						<li>
-							<ul class="dropdown-list">
-								<li class="unread notification-success"><a href="#"><i class="icon-user-add pull-right"></i><span class="block-line strong">New user registered</span><span class="block-line small">30 seconds ago</span></a></li>
-								<li class="unread notification-secondary"><a href="#"><i class="icon-heart pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="unread notification-primary"><a href="#"><i class="icon-user pull-right"></i><span class="block-line strong">Privacy settings have been changed</span><span class="block-line small">2 hours ago</span></a></li>
-								<li class="notification-danger"><a href="#"><i class="icon-cancel-circled pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="notification-info"><a href="#"><i class="icon-info pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-								<li class="notification-warning"><a href="#"><i class="icon-rss pull-right"></i><span class="block-line strong">Someone special liked this</span><span class="block-line small">60 seconds ago</span></a></li>
-							</ul>
-						</li>
-						<li class="external-last"> <a href="#" class="danger">View all notifications</a> </li>
+		<div class="header-secondary row gray-bg">
+			<div class="col-lg-12">
+				<div class="page-heading clearfix">
+					<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">Enviar</button>
+				</div>
+				<!-- Breadcrumb -->
+				<ol class="breadcrumb breadcrumb-2">
+					<li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+					<li class="active"><strong>Tareas</strong></li>
+				</ol>
+				<div class="tab-wrapper clearfix">
+		    <!--
+		    <ul class="nav nav-pills nav-pills-default pull-left">
+					  <li role="presentation"><a href="simple-view.html">STYLE 1</a></li>
+					  <li role="presentation"><a href="cards-view.html">STYLE 2</a></li>
+					  <li class="active" role="presentation"><a href="strip-view.html">STYLE 3</a></li>
+					  <li role="presentation"><a href="table-view.html">STYLE 4</a></li>
 					</ul>
-				  </li>
-				  <!-- /notifications -->
-
-				  <!-- Messages -->
-				  <li class="notifications dropdown">
-					<a data-close-others="true" data-hover="dropdown" data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-mail"></i><span class="badge badge-secondary">12</span></a>
-					<ul class="dropdown-menu pull-right">
-						<li class="first">
-							<div class="dropdown-content-header"><i class="fa fa-pencil-square-o pull-right"></i> Messages</div>
-						</li>
-						<li>
-							<ul class="media-list">
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/domnic-brown.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Domnic Brown</span>
-											<span class="media-annotation pull-right">Tue</span>
-										</a>
-										<span class="text-muted">Your product sounds interesting I would love to check this ne...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/john-smith.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">John Smith</span>
-											<span class="media-annotation pull-right">12:30</span>
-										</a>
-										<span class="text-muted">Thank you for posting such a wonderful content. The writing was outstanding...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/stella-johnson.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Stella Johnson</span>
-											<span class="media-annotation pull-right">2 days ago</span>
-										</a>
-										<span class="text-muted">Thank you for trusting us to be your source for top quality sporting goods...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/alex-dolgove.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Alex Dolgove</span>
-											<span class="media-annotation pull-right">10:45</span>
-										</a>
-										<span class="text-muted">After our Friday meeting I was thinking about our business relationship and how fortunate...</span>
-									</div>
-								</li>
-								<li class="media">
-									<div class="media-left"><img alt="" class="img-circle img-sm" src="images/domnic-brown.png"></div>
-									<div class="media-body">
-										<a class="media-heading" href="#">
-											<span class="text-semibold">Domnic Brown</span>
-											<span class="media-annotation pull-right">4:00</span>
-										</a>
-										<span class="text-muted">I would like to take this opportunity to thank you for your cooperation in recently completing...</span>
-									</div>
-								</li>
-							</ul>
-						</li>
-						<li class="external-last"> <a class="danger" href="#">All Messages</a> </li>
+		    -->
+					<ul class="nav nav-pills nav-icons pull-right">
+					  <!--<li role="presentation"><a href="#"><i class="icon-layout"></i></a></li>-->
+					  <!--<li class="active" role="presentation"><a href="#"><i class="icon-list"></i></a></li>-->
+					  <li role="presentation"><a href="#" class="toggle-filter" data-block-id="filter-box"><i class="fa fa-filter"></i></a></li>
 					</ul>
-				  </li>
-				  <!-- /messages -->
-
-				</ul>
-				<!-- /user alerts -->
+				</div>
 
 			</div>
-		  </div>
 		</div>
-		<!-- /main header -->
 
-	                           <!-- BEGIN EXAMPLE TABLE PORTLET-->
-							<?php
-							include 'dbconnection.php';
-							$sql="SELECT * FROM auv_foro WHERE COD_FORO='$cod_foro'";
-							$result=$mysqli->query($sql);
-							while($mostrar=$result->fetch_object()){
-								echo '<h1>TEMA:'.$mostrar->TEMA.'</h1>';
-								echo '<h1>DESCRIPCION:'.$mostrar->DESCRIPCION.'</h1>';
-								$cod_curso=$mostrar->COD_CURSO;
-							}
-							?>
-                            <div class="portlet light bordered">
-                                <div class="portlet-title">
-                                    <div class="caption font-dark">
-                                        <i class="icon-settings font-dark"></i>
-									
-                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
-                                        <thead>
-                                            <tr>
-                                                
-                                                <th> Nombre </th>
-                                                <th> Participación </th>
-                                                <th> Fecha </th>
 
-                                            </tr>
-											
-											
-											<?php
-											include 'dbconnection.php';
-											//$link = mysqli_connect("localhost", "root", "", "aula virtual");
-											$sql_participaciones="SELECT FA.COD_FORO,FA.TEXTO,FA.FECHA,A.NOMBRES,A.APELLIDOS FROM auv_foro_alumno FA,auv_alumno A
-											WHERE FA.COD_ALUMNO=A.COD_ALUMNO AND FA.COD_FORO=".$cod_foro.";";
-											
-											$result=$mysqli->query($sql_participaciones);
-											while($mostrar=$result->fetch_object()){
-												echo "<tr>";
-												echo "<td>".$mostrar->NOMBRES.' '.$mostrar->APELLIDOS."</td>";
-												echo "<td>".$mostrar->TEXTO."</td>";
-												echo "<td>".$mostrar->FECHA."</td>";
-												echo "</tr>";
-											}
-											?>
-										
-																				
-                                        </thead>
-										
-                                        <tbody>
-											
-										</li>
-										
-										
-									</ul>
-								</div>
-							</div>
-						</div>
+
+				<!-- Filter wrapper -->
+
+		  <div class="row filter-wrapper visible-box" id="filter-box">
+				<div class="col-lg-12">
+					<div class="filter-header">
+						<button aria-label="Close" class="close toggle-filter" type="button" data-block-id="filter-box"><i class="icon-cancel"></i></button>
+						<h3 class="title">Filtro de Tareas</h3>
 					</div>
-					<div class="row">
+					<form class="form-inline">
+						<div class="form-group">
+							<label class="form-label">Buscar</label>
+							<input type="text" id="filterusers" placeholder="Búsqueda por número de tarea, tema o descripción." class="form-control" size="100px">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+
+			<!-- /filter wrapper -->
+
+
+	<!-- Main content -->
+	<div class="main-content">
+		
+
+		<div class="animatedParent animateOnce z-index-50">
+			<div class="table-responsive indent-row animated fadeInUp">
+        <!--<input type="text" id="filterusers" placeholder="Separate by commas...">-->
+        		<table class="table table-users table-unbordered table-hover table-separate">
+				<thead>
+							<tr>
+							<th> Tarea </th>
+                            <th> Texto </th>
+                            <th> Fecha de envio </th>
+                            <th> Archivo </th>
+				</thead>
+					<tbody id="tableusers">
+					<?php
+
+					$res = $mysqli->query($select_tarea);
+					while($row = $res->fetch_object()){
+						echo '<tr>';
+									//echo '<td class="size-40"><div class="form-checkbox"><input type="checkbox" name="name1" value="value1"> <span class="check"><i class="fa fa-check"></i></span></div></td>';
+					
+						echo '<td>'.$row->COD_TAREA.'</td>';
+						echo '<td><strong>'.$row->TEMA.'</strong></td>';
+						echo '<td>'.$row->FECHA_ENVIO.'</td>';
+						echo '<td>'.$row->ARCHIVO.'</td>';
+						echo '<td>';
+						echo '<a class="btn btn-primary" class="btn btn-primary" href="borrarforo.php?id='.$row->COD_TAREA.'"><i 
+							class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
+						echo '</td>';
+						echo '</tr>';
+
+					}
+
+					?>
+						</tbody>
+					</table>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="animatedParent animateOnce z-index-10">
+			<div class="footer-main animated fadeInUp slow">&copy; 2018 <strong>EEUIO</strong> by <a target="_blank" href="#/">KAY Innovation</a> </div>
+		</footer>
+		<!-- /footer -->
+
+
+		<div class="row">
 		<?php
 		if($perfil_usuario==="ALUMNO"){
 			echo '<form action="insert_participacion.php" method="POST">
 				<textarea  name="texto"></textarea> 
 				<input type="hidden" value="'.$cod_curso.'" name="cod_curso"/>
-				<input type="hidden" value="'.$cod_foro.'" name="cod_foro"/> 
-				<input type="submit" value="Registrar participacion">
+				<input type="hidden" value="'.$cod_tarea.'" name="cod_tarea"/> 
+				<input type="submit" value="Registrar Entrega de Tarea">
 				
 				';
 					  					  echo '</form>';
-	
 		 }		
 					  
-					  
-
       ?>
-		<!-- Main content -->
-
-				
 
 	  </div>
 	  <!-- /main content -->
@@ -335,6 +268,71 @@
 
 </div>
 <!-- /page container -->
+
+
+<!--Basic Modal-->
+<div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
+<form id="tareaEnviar" method="post" action="tareaEnviar.php">
+	<div class="modal-dialog">
+    <div class="modal-content">
+      
+			<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Enviar Tarea</h4>
+      </div>
+
+
+      			<div class="form-group">
+					<label for="=Curso">Tarea</label>
+					<select id="select_tarea" name="select_tarea">;
+          			
+          			<?php $res = $mysqli->query($select_tarea);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_TAREA.'" value="'.$row->COD_TAREA.'">'.$row->COD_TAREA."</option>";
+                		}
+        				echo '  </select>';?>
+				</div>
+
+
+				<div class="form-group">
+					<label for="=Curso">Curso</label>
+					<select id="select_curso" name="select_curso">;
+          			
+          			<?php $res = $mysqli->query($select_curso);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_CURSO.'" value="'.$row->COD_CURSO.'">'.$row->COD_CURSO."</option>";
+                		}
+        				echo '  </select>';?>
+				</div>
+
+					<div class="form-group">
+					<label for="texto">Texto</label>
+					<input type="text" class="form-control" id="texto" name="texto" placeholder="Titulo de Texto">
+					</div>
+
+					<div class="form-group">
+					<label for="date">Fecha de Envio</label>
+					<input type="Date" class="form-control" id="date" name="date" placeholder="Fecha de Envio">
+					</div>
+
+					<div class="form-group">
+					<label for="archivo">Archivo</label>
+					<input type="Text" class="form-control" id="archivo" name="archivo">
+					</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" form="tareaEnviar" class="btn btn-primary">Guardar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+	</form>
+</div><!-- /.modal -->
+<!--End Basic Modal-->
+
 
 <!--Load JQuery-->
 <script src="js/jquery.min.js"></script>

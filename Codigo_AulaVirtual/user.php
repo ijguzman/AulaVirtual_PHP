@@ -142,8 +142,8 @@ $(document).ready(function(){
 			</div>
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb breadcrumb-2">
-				<li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-				<li class="active"><strong>Users</strong></li>
+				<li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+				<li class="active"><strong>Usuarios</strong></li>
 			</ol>
 			<div class="tab-wrapper clearfix">
         <!--
