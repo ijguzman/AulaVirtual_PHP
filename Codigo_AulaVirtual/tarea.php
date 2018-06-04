@@ -133,7 +133,7 @@
 <div class="header-secondary row gray-bg">
 		<div class="col-lg-12">
 			<div class="page-heading clearfix">
-				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
+				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">ENVIAR</button>
 			</div>
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb breadcrumb-2">
