@@ -34,6 +34,20 @@
 </head>
 <body>
 
+<?php
+					include 'dbconnection.php';
+					
+					$select_curso="SELECT COD_CURSO FROM auv_curso WHERE COD_ASIGNATURA='".$curso."' AND COD_DOCENTE='".$codigo_usuario."';";
+					$res_curso = $mysqli->query($select_curso);
+					
+					while($row = $res_curso->fetch_object()){
+						$cod_curso=$row->COD_CURSO;
+						//echo "<script>alert(".$cod_curso.")</script>;";
+					}
+					$select_tarea="SELECT * FROM auv_tarea WHERE COD_CURSO='".$cod_curso."';";
+						
+?>
+
 <!-- Page container -->
 <div class="page-container">
 
