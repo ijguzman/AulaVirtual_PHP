@@ -1,9 +1,13 @@
 <?php
+  //Inti
   $server='localhost';
   $user='root';
-  $password='';
-  $db='reader';
-  
+  $password='Inrikingjc1107.';
+  // $server='localhost';
+  // $user='root';
+  // $password='root';
+  // //$db='reader';
+  $db='aulavirtual_notificaciones';
 
   $mysqli = new mysqli($server, $user, $password, $db);
   $mysqli->set_charset("utf8");

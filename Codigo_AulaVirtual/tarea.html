@@ -1,4 +1,4 @@
-	<?php
+<?php
 	require ('conexion.php');
 	
 	$query = "SELECT id_estado, estado FROM t_estado ORDER BY estado";
@@ -98,9 +98,9 @@
 					<li><a href="video.html"><span class="title">Video</span></a></li> -->
 				</ul>
 			</li>
-			<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+			<li class="has-sub"><a href="tarea.html"><i class="icon-info"></i><span class="title">Tareas</span></a>
 				<ul class="nav collapse">
-					<li><a href="evaluation.php"><span class="title">Crear anuncios</span></a></li>
+					<li><a href="evaluation.php"><span class="title">Crear tareas</span></a></li>
 
 				</ul>
 			</li>
@@ -249,11 +249,11 @@
 <table width="450px"><!---Este tamaño en px es personalizable -->
 <tr>
  <td valign="top">
-  <label for="cod_anuncio">Codigo Anuncio *</label>
+  <label for="cod_tarea">Codigo Tarea *</label>
  </td>
  <td valign="top">
  
-  <input  type="text" name="cod_anuncio" maxlength="50" size="30">
+  <input  type="text" name="cod_tarea " maxlength="50" size="30">
  </td>
 </tr>
 <tr>
@@ -267,7 +267,6 @@
 				<?php while($row = $resultado->fetch_assoc()) { ?>
 					<option value="<?php echo $row['cod_curso']; ?>"><?php echo $row['curso']; ?></option>
 				<?php } ?>
-
  </td>
 </tr>
 <tr>
@@ -280,17 +279,16 @@
 </tr>
 <tr>
  <td valign="top">
-  <label for="fecha">Fecha *</label>
+  <label for="descripcion">Descripcion *</label>
  </td>
  <td valign="top">
  <input id="date" type="date">
-
+ </td>
+  <td valign="top">
+ <input id="date" type="date">
  </td>
 </tr>
 <tr>
- <td valign="top">
-  <label for="message">Mensaje *</label>
- </td>
  <td valign="top">
   <textarea  name="message" maxlength="1000" cols="25" rows="6"></textarea>
  </td>

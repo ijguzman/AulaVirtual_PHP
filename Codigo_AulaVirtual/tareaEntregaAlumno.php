@@ -1,19 +1,27 @@
 <?php
+
   session_start();
   include 'dbconnection.php';
   $nombre_usuario=$_SESSION["nombre"];
   $perfil_usuario=$_SESSION["perfil"];
   $codigo_usuario=$_SESSION["codigo"]; 
+  if($_GET){
+	$cod_tarea=$_GET["tarea"];
+	
+   }
+
 ?>
-<!DOCTYPE html>
+ 
+<html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual - Notificaciones</title>
+<title>Aula Virtual | Tareas</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -40,30 +48,293 @@
 
 <link href="css/mouldifi-forms.css" rel="stylesheet">
 
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+<![endif]-->
 
+<!--[if lte IE 8]>
+	<script src="js/plugins/flot/excanvas.min.js"></script>
+<![endif]-->
 </head>
 <body>
+<?php
+
+	include 'dbconnection.php';
+					
+		$select_curso="SELECT COD_CURSO FROM auv_curso WHERE COD_ASIGNATURA='".$curso."' 
+		AND COD_DOCENTE='".$codigo_usuario."';";
+		$res_curso = $mysqli->query($select_curso);
+					
+		while($row = $res_curso->fetch_object()){
+			$cod_curso=$row->COD_CURSO;
+		//echo "<script>alert(".$cod_curso.")</script>;";
+			}
+		$select_tarea="SELECT * FROM auv_tarea WHERE COD_CURSO='".$cod_curso."';";
+
+		$sql_envio="SELECT T.COD_TAREA, A.COD_ALUMNO FROM auv_entrega_tarea T,
+		auv_alumno A WHERE T.COD_ALUMNO=A.COD_ALUMNO AND COD_TAREA=".$cod_tarea.";";
+
+?>
+
 
 <!-- Page container -->
 <div class="page-container">
 
 	<!-- Page Sidebar -->
 	<div class="page-sidebar">
-
-		<!-- Site header  -->
 		
+		<!-- Site header  -->
+		<header class="site-header">
+		  <div class="site-logo"><a href="index.html"><img src="images/logo.jpg" alt="Mouldifi" title="Mouldifi"></a></div>
+		  <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
+		  <div class="sidebar-mobile-menu visible-xs"><a data-target="#side-nav" data-toggle="collapse" class="mobile-menu-icon" href="#"><i class="icon-menu"></i></a></div>
+		</header>
+		<!-- /site header -->	
+
+
+		<!-- Main navigation -->
+		<ul id="side-nav" class="main-menu navbar-collapse collapse">
+		
+			<?php
+         echo '<li class="active"><a href="tarea.php"><i class=" icon-graduation-cap"></i><span class="title">Tareas</span></a>';
+         echo '<li ><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>
+		 <ul class="nav collapse">';
+		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="crear_foros.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			<li ><a href="modificar_foro.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
+			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
+			
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Foros</span></a>';
+		 }			
+		 
+		 echo'</ul>';
+
+		 //echo '<li ><a href="anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
+		 echo '<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+		 
+		 <ul class="nav collapse">';
+		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Anuncnio</span></a>
+			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }			
+		 
+		 echo'</ul>
+	 </li>';
+		 echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+      ?>		</ul>
+			</li>
+		</ul>
+		<!-- /main navigation -->
+  </div>
+  <!-- /page sidebar -->
+
+
+  <!-- Main container -->
+  <div class="main-container gray-bg">
+
+
+		  	<!-- Main content -->
+
+		<div class="header-secondary row gray-bg">
+			<div class="col-lg-12">
+				<div class="page-heading clearfix">
+					<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">Enviar</button>
+				</div>
+				<!-- Breadcrumb -->
+				<ol class="breadcrumb breadcrumb-2">
+					<li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+					<li class="active"><strong>Tareas</strong></li>
+				</ol>
+				<div class="tab-wrapper clearfix">
+		    <!--
+		    <ul class="nav nav-pills nav-pills-default pull-left">
+					  <li role="presentation"><a href="simple-view.html">STYLE 1</a></li>
+					  <li role="presentation"><a href="cards-view.html">STYLE 2</a></li>
+					  <li class="active" role="presentation"><a href="strip-view.html">STYLE 3</a></li>
+					  <li role="presentation"><a href="table-view.html">STYLE 4</a></li>
+					</ul>
+		    -->
+					<ul class="nav nav-pills nav-icons pull-right">
+					  <!--<li role="presentation"><a href="#"><i class="icon-layout"></i></a></li>-->
+					  <!--<li class="active" role="presentation"><a href="#"><i class="icon-list"></i></a></li>-->
+					  <li role="presentation"><a href="#" class="toggle-filter" data-block-id="filter-box"><i class="fa fa-filter"></i></a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+
+
+				<!-- Filter wrapper -->
+
+		  <div class="row filter-wrapper visible-box" id="filter-box">
+				<div class="col-lg-12">
+					<div class="filter-header">
+						<button aria-label="Close" class="close toggle-filter" type="button" data-block-id="filter-box"><i class="icon-cancel"></i></button>
+						<h3 class="title">Filtro de Tareas</h3>
+					</div>
+					<form class="form-inline">
+						<div class="form-group">
+							<label class="form-label">Buscar</label>
+							<input type="text" id="filterusers" placeholder="Búsqueda por número de tarea, tema o descripción." class="form-control" size="100px">
+						</div>
+						
+					</form>
+				</div>
+			</div>
+
+			<!-- /filter wrapper -->
+
+
 	<!-- Main content -->
 	<div class="main-content">
+		
+
+		<div class="animatedParent animateOnce z-index-50">
+			<div class="table-responsive indent-row animated fadeInUp">
+        <!--<input type="text" id="filterusers" placeholder="Separate by commas...">-->
+        		<table class="table table-users table-unbordered table-hover table-separate">
+				<thead>
+							<tr>
+							<th> Tarea </th>
+                            <th> Texto </th>
+                            <th> Fecha de envio </th>
+                            <th> Archivo </th>
+				</thead>
+					<tbody id="tableusers">
+					<?php
+
+					$res = $mysqli->query($select_tarea);
+					while($row = $res->fetch_object()){
+						echo '<tr>';
+									//echo '<td class="size-40"><div class="form-checkbox"><input type="checkbox" name="name1" value="value1"> <span class="check"><i class="fa fa-check"></i></span></div></td>';
+					
+						echo '<td>'.$row->COD_TAREA.'</td>';
+						echo '<td><strong>'.$row->TEMA.'</strong></td>';
+						echo '<td>'.$row->FECHA_ENVIO.'</td>';
+						echo '<td>'.$row->ARCHIVO.'</td>';
+						echo '<td>';
+						echo '<a class="btn btn-primary" class="btn btn-primary" href="borrarforo.php?id='.$row->COD_TAREA.'"><i 
+							class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
+						echo '</td>';
+						echo '</tr>';
+
+					}
+
+					?>
+						</tbody>
+					</table>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer class="animatedParent animateOnce z-index-10">
+			<div class="footer-main animated fadeInUp slow">&copy; 2018 <strong>EEUIO</strong> by <a target="_blank" href="#/">KAY Innovation</a> </div>
+		</footer>
+		<!-- /footer -->
 
 
+		<div class="row">
+		<?php
+		if($perfil_usuario==="ALUMNO"){
+			echo '<form action="insert_participacion.php" method="POST">
+				<textarea  name="texto"></textarea> 
+				<input type="hidden" value="'.$cod_curso.'" name="cod_curso"/>
+				<input type="hidden" value="'.$cod_tarea.'" name="cod_tarea"/> 
+				<input type="submit" value="Registrar Entrega de Tarea">
+				
+				';
+					  					  echo '</form>';
+		 }		
+					  
+      ?>
 
 	  </div>
 	  <!-- /main content -->
 
+  </div>
+  <!-- /main container -->
 
-</body>
+</div>
+<!-- /page container -->
 
-  <!--Load JQuery-->
+
+<!--Basic Modal-->
+<div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
+<form id="tareaEnviar" method="post" action="tareaEnviar.php">
+	<div class="modal-dialog">
+    <div class="modal-content">
+      
+			<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Enviar Tarea</h4>
+      </div>
+
+
+      			<div class="form-group">
+					<label for="=Curso">Tarea</label>
+					<select id="select_tarea" name="select_tarea">;
+          			
+          			<?php $res = $mysqli->query($select_tarea);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_TAREA.'" value="'.$row->COD_TAREA.'">'.$row->COD_TAREA."</option>";
+                		}
+        				echo '  </select>';?>
+				</div>
+
+
+				<div class="form-group">
+					<label for="=Curso">Curso</label>
+					<select id="select_curso" name="select_curso">;
+          			
+          			<?php $res = $mysqli->query($select_curso);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_CURSO.'" value="'.$row->COD_CURSO.'">'.$row->COD_CURSO."</option>";
+                		}
+        				echo '  </select>';?>
+				</div>
+
+					<div class="form-group">
+					<label for="texto">Texto</label>
+					<input type="text" class="form-control" id="texto" name="texto" placeholder="Titulo de Texto">
+					</div>
+
+					<div class="form-group">
+					<label for="date">Fecha de Envio</label>
+					<input type="Date" class="form-control" id="date" name="date" placeholder="Fecha de Envio">
+					</div>
+
+					<div class="form-group">
+					<label for="archivo">Archivo</label>
+					<input type="Text" class="form-control" id="archivo" name="archivo">
+					</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" form="tareaEnviar" class="btn btn-primary">Guardar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+	</form>
+</div><!-- /.modal -->
+<!--End Basic Modal-->
+
+
+<!--Load JQuery-->
 <script src="js/jquery.min.js"></script>
 <!-- Load CSS3 Animate It Plugin JS -->
 <script src="js/plugins/css3-animate-it-plugin/css3-animate-it.js"></script>
@@ -79,54 +350,11 @@
 <script src="js/plugins/flot/jquery.flot.pie.min.js"></script>
 <script src="js/plugins/flot/jquery.flot.time.min.js"></script>
 <script src="js/functions.js"></script>
-<!--Load JQuery-->
-<script src="js/jquery.min.js"></script>
-<!-- Load CSS3 Animate It Plugin JS -->
-<script src="js/plugins/css3-animate-it-plugin/css3-animate-it.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/plugins/metismenu/jquery.metisMenu.js"></script>
-<script src="js/plugins/blockui-master/jquery-ui.js"></script>
-<script src="js/plugins/blockui-master/jquery.blockUI.js"></script>
-<script src="js/functions.js"></script>
-
-<script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="js/plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="js/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
-<script src="js/plugins/datatables/jszip.min.js"></script>
-<script src="js/plugins/datatables/pdfmake.min.js"></script>
-<script src="js/plugins/datatables/vfs_fonts.js"></script>
-<script src="js/plugins/datatables/extensions/Buttons/js/buttons.html5.js"></script>
-<script src="js/plugins/datatables/extensions/Buttons/js/buttons.colVis.js"></script>
 
 <!--ChartJs-->
 <script src="js/plugins/chartjs/Chart.min.js"></script>
 <script>
-
 	$(document).ready(function () {
-		$('.dataTables-example').DataTable({
-			dom: '<"html5buttons" B>lTfgitp',
-			buttons: [
-				{
-					extend: 'copyHtml5',
-					exportOptions: {
-						columns: [ 0, ':visible' ]
-					}
-				},
-				{
-					extend: 'excelHtml5',
-					exportOptions: {
-						columns: ':visible'
-					}
-				},
-				{
-					extend: 'pdfHtml5',
-					exportOptions: {
-						columns: [ 0, 1, 2, 3, 4, 5 ]
-					}
-				},
-				'colvis'
-			]
-		});
 		var $checkbox = $('.todo-list .checkbox input[type=checkbox]');
 
 		$checkbox.change(function () {
@@ -492,68 +720,10 @@
 		});
 		canvas.parentNode.parentNode.appendChild(legendHolder.firstChild);
 	});
+	
+          
+      ?>
+      
 </script>
+</body>
 </html>
-
-<?php
-include 'dbconnection.php';
-
-
-echo '
-<h1 class="page-title">BIENVENIDO '.$nombre_usuario.' '.$perfil_usuario.' </h1>
-<!-- Breadcrumb -->
-<div class="row">
-	<div class="col-lg-12 animatedParent animateOnce z-index-50">
-		<div class="panel panel-default animated fadeInUp">
-			<div class="panel-heading clearfix">
-				<ul class="panel-tool-options">
-					<li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
-					<li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
-					<li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
-				</ul>
-			</div>
-			<div class="panel-body">
-				
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover dataTables-example" >
-						<thead>
-							<tr>
-								<th>NRC</th>
-								<th>ASIGNATURA</th>
-								
-							</tr>
-						</thead>
-						<tbody>';
-						$select_cursos="";
-						if($perfil_usuario==="DOCENTE"){
-                        		$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND COD_DOCENTE='".$codigo_usuario."';";
-						}else if($perfil_usuario==="ALUMNO"){
-								$select_cursos="SELECT A.COD_ASIGNATURA AS CURSO,A.DESCRIPCION AS NOMBRE FROM auv_curso C,auv_asignatura A, auv_alumno_curso CA WHERE A.COD_ASIGNATURA=C.COD_ASIGNATURA AND C.COD_CURSO=CA.COD_CURSO AND COD_ALUMNO='".$codigo_usuario."';";
-						}
-						$res = $mysqli->query($select_cursos);
-
-						while($row = $res->fetch_object()){
-							echo '<tr>';
-							//<li><a href="updateuserform.php?ci='.$row->USU_CEDULA.'" >Editar</a></li>
-							echo "<td><a href='tarea.php?Curso=".$row->CURSO."'>".$row->CURSO."</a></td>";
-							echo '<td>'.$row->NOMBRE.'</td>';
-							echo '</tr>';
-	          			}
-
-	echo '</tbody>
-	<tfoot>
-	<tr>
-    <th>NRC</th>
-    <th>ASIGNATURA</th>
-	</tr>
-	</tfoot>
-	</table>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>';
-
-
-
-?>

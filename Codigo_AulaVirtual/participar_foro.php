@@ -21,7 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual | Anuncios</title>
+<title>Aula Virtual | Foros</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -79,31 +79,41 @@
 
 		<!-- Main navigation -->
 		<ul id="side-nav" class="main-menu navbar-collapse collapse">
-			<li class="has-sub active "><a href="index.html"><i class="icon-gauge"></i><span class="title">Dashboard</span></a>
-				<ul class="nav">
-					<li class="active"><a href="index.html"><span class="title">Misc.</span></a></li>
-					<!--<li><a href="ecommerce-dashboard.html"><span class="title">E-Commerce</span></a></li>
-					<li><a href="news-dashboard.html"><span class="title">News Portal</span></a></li>-->
-				</ul>
-			</li>
-			<li><a href="users.php"><i class="icon-users"></i><span class="title">Usuarios</span></a>
-			</li>
-			<li ><a href="toolsMenu.php"><i class="icon-tools"></i><span class="title">Menú de Herramientas</span></a>
+		
+			<?php
+         echo '<li class="active"><a href="tarea.php"><i class=" icon-graduation-cap"></i><span class="title">Tareas</span></a>';
+         echo '<li ><a href="foro.php"><i class="icon-pencil"></i><span class="title">Foros</span></a>
+		 <ul class="nav collapse">';
+		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="crear_foros.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			<li ><a href="modificar_foro.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
+			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
+			
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Foros</span></a>';
+		 }			
+		 
+		 echo'</ul>';
 
-
-			<li class="has-sub"><a href="panels.html"><i class="icon-newspaper"></i><span class="title">Evaluaciones</span></a>
-				<ul class="nav collapse">
-					<li><a href="evaluation.php"><span class="title">Resultados de Evaluaciones</span></a></li>
-					
-				</ul>
-			</li>
-			<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
-				<ul class="nav collapse">
-					<li><a href="anuncios.php"><span class="title">Crear anuncios</span></a></li>
-					<li><a href="anuncios.php"><span class="title">Modificar anuncios</span></a></li>
-					<li><a href="anuncios.php"><span class="title">Visualizar anuncios</span></a></li>
-
-				</ul>
+		 //echo '<li ><a href="anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
+		 echo '<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+		 
+		 <ul class="nav collapse">';
+		 
+		 
+		 if($perfil_usuario==="DOCENTE"){
+			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Anuncnio</span></a>
+			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }else if($perfil_usuario==="ALUMNO"){
+			echo'<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+		 }			
+		 
+		 echo'</ul>
+	 </li>';
+		 echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+      ?>		</ul>
 			</li>
 		</ul>
 		<!-- /main navigation -->

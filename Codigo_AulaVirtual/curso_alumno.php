@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
 <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-<title>Aula Virtual - Notificaciones</title>
+<title>Aula Virtual | Notificaciones</title>
 <!-- Site favicon -->
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 <!-- /site favicon -->
@@ -559,16 +559,17 @@
           WHERE C.COD_DOCENTE=D.COD_DOCENTE AND C.COD_ASIGNATURA=A.COD_ASIGNATURA";
           $res = $mysqli->query($select_curso);
                 while($row = $res->fetch_object()){
-                    echo "<option value='".$row->COD_CURSO."'>".$row->COD_CURSO."</option>";
-                    $docente=$row->NOMBRE.' '.$row->APELLIDOS;
+					$docente=$row->NOMBRE.' '.$row->APELLIDOS;
                     $asignatura=$row->ASIGNATURA;
                     $nrc=$row->COD_CURSO;
+					echo "<option id='opcion_curso' value='".$row->COD_CURSO."/".$docente."/".$asignatura."'>".$row->COD_CURSO." ".$docente." ".$asignatura."</option>";
+                    
                 }
         echo '  </select>';
         echo '
         <h4 class="page-title">NRC: <input type="text" id="nrc" readonly="readonly" name="nrc"> </h4>
-        <h4 class="page-title">ASIGNATURA: ARQUITECTURA DE SOFTWARE </h4>
-        <h4 class="page-title">DOCENTE: PABLO PARRA </h4>
+        <h4 class="page-title">ASIGNATURA: <input type="text" id="asignatura" readonly="readonly" name="asignatura"> </h4>
+        <h4 class="page-title">DOCENTE: <input type="text" id="docente" readonly="readonly" name="docente"> </h4>
         <!-- Breadcrumb -->
         <div class="row">
             <div class="col-lg-12 animatedParent animateOnce z-index-50">
@@ -610,9 +611,6 @@
             echo '</tbody>
             <tfoot>
             <tr>
-            <th>CODIGO ALUMNO</th>
-            <th>NOMBRES</th>
-            <th>CORREO ELECTRONICO</th>
             
             </tr>
             </tfoot>
@@ -626,15 +624,18 @@
         echo '<br/><br/><br/><br/><br/><br/>
         <input type="hidden" id="Lista_alumnos" name="Lista_alumnos"/> 
         <input type="submit" value="Cargar alumnos" onclick="cargar_alumnos()">';
-        // echo '</form>';
 ?>
 <script>
     function cargar_datos_curso(){
-        var docente = "<?php echo $docente ?>";
-		var asignatura = "<?php echo $asignatura ?>";
-		var nrc = "<?php echo $nrc ?>";
-        alert(nrc);
-        $("#nrc").val($("#lista_cursos").val());
+        
+		// var docente = "<?php echo $docente ?>";
+		// var asignatura = "<?php echo $asignatura ?>";
+		// var nrc = "<?php echo $nrc ?>";
+		var detalles_curso=$("#lista_cursos").val().split("/");
+        //$("#nrc").val($("#lista_cursos").val());
+		$("#nrc").val(detalles_curso[0]);
+		$("#asignatura").val(detalles_curso[2]);
+		$("#docente").val(detalles_curso[1]);
 
     }
     function cargar_alumnos(){

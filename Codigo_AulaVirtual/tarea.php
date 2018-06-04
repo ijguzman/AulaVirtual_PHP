@@ -6,8 +6,8 @@
   $codigo_usuario=$_SESSION["codigo"]; 
   if($_GET){
 	$curso=$_GET["Curso"];
-	//echo "<script>alert(".$curso.")</script>;";
-	}
+	$nrc=$_GET["Nrc"];
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,8 +93,8 @@
 		 
 		 
 		 if($perfil_usuario==="DOCENTE"){
-			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
-			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
+			echo'<li ><a href="crear_foros.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			<li ><a href="modificar_foro.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
 			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
 			
 		 }else if($perfil_usuario==="ALUMNO"){
@@ -119,6 +119,9 @@
 		 echo'</ul>
 	 </li>';
 		 echo '<li ><a href="wiki.php"><i class=" icon-graduation-cap"></i><span class="title">Wikis</span></a>';
+		 if($perfil_usuario==="DOCENTE"){
+			echo '<li ><a href="notificaciones.php?Nrc='.$nrc.'"><i class=" icon-graduation-cap"></i><span class="title">Enviar notificaciones</span></a>';
+		}
       ?>		</ul>
 			</li>
 		</ul>
@@ -133,12 +136,12 @@
 <div class="header-secondary row gray-bg">
 		<div class="col-lg-12">
 			<div class="page-heading clearfix">
-				<h1 class="page-title pull-left">Usuarios</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">NUEVO</button>
+				<h1 class="page-title pull-left">Tareas</h1><button type="button" class="btn btn-primary btn-sm btn-add" data-toggle="modal" data-target="#modal-1">ENVIAR</button>
 			</div>
 			<!-- Breadcrumb -->
 			<ol class="breadcrumb breadcrumb-2">
-				<li><a href="index.html"><i class="fa fa-home"></i>Home</a></li>
-				<li class="active"><strong>Users</strong></li>
+				<li><a href="index.html"><i class="fa fa-home"></i>Inicio</a></li>
+				<li class="active"><strong>Tareas</strong></li>
 			</ol>
 			<div class="tab-wrapper clearfix">
         <!--
@@ -166,7 +169,7 @@
 		<div class="col-lg-12">
 			<div class="filter-header">
 				<button aria-label="Close" class="close toggle-filter" type="button" data-block-id="filter-box"><i class="icon-cancel"></i></button>
-				<h3 class="title">Filtro de Usuarios</h3>
+				<h3 class="title">Filtro de Tareas</h3>
 			</div>
 			<form class="form-inline">
 				<div class="form-group">
@@ -195,6 +198,7 @@
 								<th>Descripcion</th>
 								<th>Fecha de publicación</th>
 								<th>Fecha límite</th>
+								<th>Borrar</th>
 				</thead>
 					<tbody id="tableusers">
 					<?php
@@ -208,8 +212,12 @@
 						echo '<td><strong>'.$row->TEMA.'</strong></td>';
 						echo '<td>'.$row->DESCRIPCION.'</td>';
 						echo '<td>'.$row->FECHA_FIN.'</td>';
-						echo '<td>'.$row->FECHA_FIN.'</td>
-						</tr>';
+						echo '<td>'.$row->FECHA_FIN.'</td>';
+						echo '<td>';
+						echo '<a class="btn btn-primary" class="btn btn-primary" href="borrarforo.php?id='.$row->COD_TAREA.'"><i 
+							class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>';
+						echo '</td>';
+						echo '</tr>';
 
 					}
 
@@ -234,9 +242,10 @@
 </div>
 <!-- /page container -->
 
+
 <!--Basic Modal-->
 <div id="modal-1" class="modal fade" tabindex="-1" role="dialog">
-<form id="newuser" method="post" action="newuser.php">
+<form id="tareaNueva" method="post" action="tareaNueva.php">
 	<div class="modal-dialog">
     <div class="modal-content">
       
@@ -244,33 +253,42 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Nueva Tarea</h4>
       </div>
-      
-					<div class="form-group">
-					<label for="emailaddress">Email</label>
-					<input type="email" class="form-control" id="emailaddress" name="emailaddress" placeholder="Email">
-					</div>
-					<div class="form-group">
-					<label for="password">Password</label>
-					<input type="text" class="form-control" id="password" name="password" placeholder="Contraseña">
-					</div>
-					<div class="form-group">
-					<label for="firstname">Nombre</label>
-					<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Nombre de usuario" onkeypress="generarClave()">
-					</div>
-					<div class="form-group">
-					<label for="rol">Rol</label>
-					<!--<input type="text" class="form-control" id="rol" name="rol" placeholder="Seleccione el rol">-->
-					<select id="rol_select" name="select_rol" onchange="generarClave()">;
-          <?php $res = $mysqli->query($select_rol);
-                while($row = $res->fetch_object()){
-                    echo '
-                        <option id="'.$row->COD_ROL.'" value="'.$row->NOMBRE.'">'.$row->NOMBRE."</option>";
-                }
+
+				<div class="form-group">
+					<label for="=Curso">Curso</label>
+					<select id="select_curso" name="select_curso">;
+          			
+          			<?php $res = $mysqli->query($select_curso);
+                		while($row = $res->fetch_object()){
+                    	echo '
+                        	<option id="'.$row->COD_CURSO.'" value="'.$row->COD_CURSO.'">'.$row->COD_CURSO."</option>";
+                		}
         				echo '  </select>';?>
+				</div>
+
+					<div class="form-group">
+					<label for="tema">Tema</label>
+					<input type="text" class="form-control" id="tema" name="tema" placeholder="Tema de la tarea">
 					</div>
+
+					<div class="form-group">
+					<label for="descripcion">Descripcion</label>
+					<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion de la tarea">
+					</div>
+
+					<div class="form-group">
+					<label for="fechainicio">Fecha de inicio</label>
+					<input type="Date" class="form-control" id="fechainicio" name="fechainicio">
+					</div>
+
+					<div class="form-group">
+					<label for="fechafin">Fecha de fin</label>
+					<input type="Date" class="form-control" id="fechafin" name="fechafin">
+					</div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" form="newuser" class="btn btn-primary">Guardar</button>
+        <button type="submit" form="tareaNueva" class="btn btn-primary">Guardar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
