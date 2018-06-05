@@ -81,8 +81,13 @@ $(document).ready(function(){
 		<ul id="side-nav" class="main-menu navbar-collapse collapse">
 		<?php
          echo '<li class="active"><a href="user.php"><i class=" icon-graduation-cap"></i><span class="title">Gestionar usuarios</span></a>';
-         echo '<li ><a href="rol_a_persona.php"><i class="icon-pencil"></i><span class="title">Asignar Rol a Persona</span></a>';
-         echo '<li ><a href="evaluation.php"><i class=" icon-graduation-cap"></i><span class="title">Lista de usuarios</span></a>';
+				 echo '<li ><a href="curso_alumno.php"><i class=" icon-graduation-cap"></i><span class="title">Crear cursos</span></a>';
+				 
+				 echo '<li ><a ><i class="icon-pencil"></i><span class="title">Servicios Web</span></a>
+				 <ul class="nav collapse">';
+				 echo '<li ><a href="core.php"><i class=" icon-graduation-cap"></i><span class="title">Core</span></a>';
+				 echo '<li ><a href="educacioncontinua.php"><i class=" icon-graduation-cap"></i><span class="title">Educacion Continua</span></a>';
+				 echo '</ul';
       ?>
 		</ul>
 		<!-- /main navigation -->
@@ -98,7 +103,7 @@ $(document).ready(function(){
 
 		<!-- User info -->
         <ul class="user-info pull-left">
-          <li class="profile-info dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="images/man-3.jpg"><?php echo  $_SESSION["username"] ?> <span class="caret"></span></a>
+          <!-- <li class="profile-info dropdown"><a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"> <img width="44" class="img-circle avatar" alt="" src="images/man-3.jpg"><?php echo  $_SESSION["username"] ?> <span class="caret"></span></a> -->
 
 			<!-- User action menu -->
             <ul class="dropdown-menu">

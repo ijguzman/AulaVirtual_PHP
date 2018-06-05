@@ -50,6 +50,10 @@ if($_POST){
                   $perfil="ALUMNO";
                 }
               }
+            }else{
+              $perfil="ADMINISTRADOR";
+              $_SESSION["perfil"] = $perfil;
+              redirect("user.php");
             }
             session_start();
             $_SESSION["codigo"] = $codigo_persona;

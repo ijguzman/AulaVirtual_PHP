@@ -2,11 +2,11 @@
   //Inti
   //$server='localhost';
   //$user='root';
-  //$password='Inrikingjc1107.';
+  $password='Inrikingjc1107.';
    $server='localhost';
    $user='root';
   // $password='root';
-  $password='';
+  //$password='';
   //$db='reader';
   $db='aulavirtual_notificaciones';
 

@@ -2,7 +2,7 @@
 include "array_object.php";
 include "redirect.php";
 // $servicio="http://192.168.1.142:8080/universidad-soap/universidadSoapWS?wsdl";
-$servicio="http://192.168.137.7:8080/universidad-soap/universidadSoapWS?wsdl";
+$servicio="http://192.168.1.130:8080/universidad-soap/universidadSoapWS?wsdl";
 $client = new SoapClient($servicio);
 $lista_periodos = $client->listarPeriodos();
 $periodos=json_decode(object2array($lista_periodos)["return"]);
