@@ -1,16 +1,18 @@
 <?php
   //Inti
-  $server='localhost';
-  $user='root';
-  $password='Inrikingjc1107.';
-  // $server='localhost';
-  // $user='root';
+  //$server='localhost';
+  //$user='root';
+  //$password='Inrikingjc1107.';
+   $server='localhost';
+   $user='root';
   // $password='root';
-  // //$db='reader';
+  $password='';
+  //$db='reader';
   $db='aulavirtual_notificaciones';
 
   $mysqli = new mysqli($server, $user, $password, $db);
-  $mysqli->set_charset("utf8");
+  //$mysqli->set_charset("utf8");
+  $mysqli->set_charset("latin1_swedish_ci");
 
  
 

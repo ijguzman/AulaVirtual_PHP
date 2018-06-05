@@ -18,7 +18,7 @@ if($_POST){
   $sql = "INSERT INTO auv_foro VALUES ('".$max_int."','".$curso."','".$tema."','".$descripcion."','".$fechainicio."','".$fechafin."')";
 
   if ($mysqli->query($sql) === TRUE) {
-      echo "Foro ingresado correctamente";
+    redirect("foro.php");
   } else {
       echo "Error: " . $sql . "<br>" . $mysqli->error;
   }

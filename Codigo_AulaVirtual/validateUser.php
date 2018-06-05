@@ -14,11 +14,11 @@ if($_POST){
      if($row->ESTADO==="ACT")
       {
             
-            if(is_null($row->$FECHA_ULTIMO_ACCESO)){
-              $flag_redireccion=true;
-            }else{
-              $flag_redireccion=false;
-            }
+            //if(is_null($row->$FECHA_ULTIMO_ACCESO)){
+            //  $flag_redireccion=true;
+            //}else{ 
+            //  $flag_redireccion=false;
+            //}
             date_default_timezone_set('America/Guayaquil');
             $date = date('Y-m-d H:i:s', time());
             

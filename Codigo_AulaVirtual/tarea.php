@@ -93,7 +93,7 @@
 		 
 		 
 		 if($perfil_usuario==="DOCENTE"){
-			echo'<li ><a href="crear_foros.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
+			echo'<li ><a href="	.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Foro</span></a>
 			<li ><a href="modificar_foro.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Foro</span></a>
 			<li ><a href="ver_participaciones.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Ver Participaciones</span></a>';
 			
@@ -285,6 +285,9 @@
 					<label for="fechafin">Fecha de fin</label>
 					<input type="Date" class="form-control" id="fechafin" name="fechafin">
 					</div>
+
+					<input type="hidden" id="Lista_alumnos" name="nrc" value="<?php echo $nrc?>"/>
+					<input type="hidden" id="Lista_alumnos" name="curso" value="<?php echo $curso?>"/>
 
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
