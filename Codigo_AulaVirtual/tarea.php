@@ -104,16 +104,20 @@
 		 echo'</ul>';
 
 		 //echo '<li ><a href="anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Anuncios</span></a>';
-		 echo '<li class="has-sub"><a href="anuncios.html"><i class="icon-info"></i><span class="title">Anuncios</span></a>
+		 echo '<li class="has-sub"><a href="anuncios.php?curso='.$curso.'"><i class="icon-info"></i><span class="title">Anuncios</span></a>
 		 
 		 <ul class="nav collapse">';
 		 
 		 
 		 if($perfil_usuario==="DOCENTE"){
-			echo'<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Anuncnio</span></a>
-			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+			echo
+			'
+			<li ><a href="anuncios.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Crear Anuncnio</span></a>
+			<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>
+			<li ><a href="visualizar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Visualizar Anuncnio</span></a>
+			';
 		 }else if($perfil_usuario==="ALUMNO"){
-			echo'<li ><a href="modificar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Modificar Anuncio</span></a>';
+			echo'<li ><a href="visualizar_anuncio.php?curso='.$curso.'"><i class="icon-pencil"></i><span class="title">Visualizar Anuncio</span></a>';
 		 }			
 		 
 		 echo'</ul>
