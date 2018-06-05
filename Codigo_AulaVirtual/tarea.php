@@ -58,7 +58,7 @@
 <body>
 <?php
 					include 'dbconnection.php';
-					
+					if($perfil_usuario==="DOCENTE")
 					$select_curso="SELECT COD_CURSO FROM auv_curso WHERE COD_ASIGNATURA='".$curso."' AND COD_DOCENTE='".$codigo_usuario."';";
 					$res_curso = $mysqli->query($select_curso);
 					

@@ -73,11 +73,16 @@
 				</ul>
 			</li> -->
 
-      <?php
-         echo '<li ><a href="user.php"><i class=" icon-graduation-cap"></i><span class="title">Gestionar usuarios</span></a>';
-         echo '<li class="active"><a href="rol_a_persona.php"><i class="icon-pencil"></i><span class="title">Asignar Rol a Persona</span></a>';
-         echo '<li ><a href="evaluation.php"><i class=" icon-graduation-cap"></i><span class="title">Lista de usuarios</span></a>';
-      ?>
+			<?php
+         		echo '<li ><a href="user.php"><i class=" icon-graduation-cap"></i><span class="title">Gestionar usuarios</span></a>';
+				 echo '<li ><a href="curso_alumno.php"><i class=" icon-graduation-cap"></i><span class="title">Crear cursos</span></a>';
+				 
+				 echo '<li ><a ><i class="icon-pencil"></i><span class="title">Servicios Web</span></a>
+				 <ul class="nav collapse">';
+				 echo '<li class="active"><a href="core.php"><i class=" icon-graduation-cap"></i><span class="title">Core</span></a>';
+				 echo '<li ><a href="educacioncontinua.php"><i class=" icon-graduation-cap"></i><span class="title">Educacion Continua</span></a>';
+				 echo '</ul';
+      		?>
       
 		</ul>
 		<!-- /main navigation -->
