@@ -1,13 +1,20 @@
 <?php
+ error_reporting(0); 
   session_start();
   include 'dbconnection.php';
+
   $nombre_usuario=$_SESSION["nombre"];
   $perfil_usuario=$_SESSION["perfil"];
   $codigo_usuario=$_SESSION["codigo"]; 
   if($_GET){
 	$anuncio=$_GET["anuncio"];
+
+	
+	$nrc=$_GET["nrc"];
+	
 	$curso=$_GET["curso"];
-  }
+
+}
   print_r($_GET);
 ?>
 <!DOCTYPE html>
@@ -258,7 +265,7 @@
 							$sql="SELECT * FROM auv_anuncio WHERE COD_ANUNCIO='$anuncio'";
 							$result=$mysqli->query($sql);
 							while($mostrar=$result->fetch_object()){
-								echo '<h2>Tema: ' .$mostrar->TEMA.'</h2>';
+								echo '<h2>Tema: <input type="text" value= "'.$mostrar->TEMA.'" name="fecha"></h2>';
 								$cod_curso=$mostrar->COD_CURSO;
 							}
 							?>
@@ -283,7 +290,7 @@
 							while($mostrar=$result->fetch_object()){
 								
 	
-			echo '<form action="insert_anuncio.php" method="POST">
+			echo '<form action="mod_anuncio.php" method="POST">
 				<input type="hidden" value="'.$anuncio.'" name="cod_anuncio"/>
 				<input type="hidden" value="'.$curso.'" name="cod_curso"/> 
 

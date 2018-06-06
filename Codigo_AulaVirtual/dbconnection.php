@@ -2,7 +2,7 @@
   //Inti
   //$server='localhost';
   //$user='root';
-  $password='Inrikingjc1107.';
+  $password='';
    $server='localhost';
    $user='root';
   // $password='root';

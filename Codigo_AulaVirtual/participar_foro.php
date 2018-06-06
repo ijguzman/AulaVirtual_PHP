@@ -311,7 +311,7 @@
 		if($perfil_usuario==="ALUMNO"){
 			echo '<form action="insert_participacion.php" method="POST">
 				<textarea  name="texto"></textarea> 
-				<br><input type="hidden" value="'.$cod_curso.'" name="cod_curso"/></br>
+				<input type="hidden" value="'.$cod_curso.'" name="cod_curso"/>
 				<input type="hidden" value="'.$cod_foro.'" name="cod_foro"/> 
 				<input type="submit" value="Registrar participacion">
 				

@@ -6,10 +6,11 @@
   $codigo_usuario=$_SESSION["codigo"]; 
   if($_GET){
 	$anuncio=$_GET["anuncio"];
-	$curso=$_GET["Curso"];
+	$curso=$_GET["curso"];
 	$nrc=$_GET["nrc"];
   }
   print_r($_GET);
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -254,21 +255,30 @@
 		  </div>
 		</div>
 		<!-- /main header -->
-		
+		<?php
+							
+		?>
 		<h2>Anuncios</h2>		
 
 		
 		<?php
+		include 'dbconnection.php';
+		$sql="SELECT * FROM auv_anuncio WHERE COD_ANUNCIOS='$anuncio'";
+		$result=$mysqli->query($sql);
+		while($mostrar=$result->fetch_object()){
+			echo '<h1>TEMA:'.$mostrar->COD_CURSO.'</h1>';
+			$curso=$mostrar->COD_CURSO;
+		}
 	
 		echo '<form action="insert_anuncio.php" method="POST">
 		<table width="450px">
-		<input type="hidden" value="'.$anuncio.'" name="cod_anuncio"/>
-		<input type="hidden" value="'.$curso.'" name="cod_curso"/> 
-		<br><label><br><h2> Tema <input type="text"></br> </h2></label></br>
-		<br><label><br><h2> Descripcion <input type="text"></br> </h2></label></br>
-		<br><label><br><h2> Fecha <input type="date"></br> </h2></label></br>
 		
-		<br><td><input type="submit" value="Registrar cambios"></br>
+		<input type="hidden" value="'.$curso.'" name="curso"/> 
+		<br><label><br><h2> Tema <input type="text" name="tema"></br> </h2></label></br>
+		<br><label><br><h2> Descripcion <input type="text" name="descripcion"></br> </h2></label></br>
+		<br><label><br><h2> Fecha <input type="date" name="fecha"></br> </h2></label></br>
+		
+		<br><td><input type="submit" value="Guardar"></br>
 		</td>
 
 
